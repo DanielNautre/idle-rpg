@@ -361,7 +361,7 @@ class Game(object):
                     self.killed_champ.append(self.ennemy['name'])
                     death_message = self.ennemy['death'][self.hero.job]
                     if len(death_message) > 0:
-                        channel.addStory("<i>"+death_message+"</i>")
+                        channel.addStory("<b>{0}</b>  <i>{1}</i>".format(self.hero.name, death_message))
 
 
                 earned_xp = int(self.ennemy['lvl'] * 100 * self.ennemy['strength'] * unique)
