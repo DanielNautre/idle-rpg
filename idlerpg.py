@@ -82,7 +82,7 @@ def save(game, hero):
     data['game'] = game_data
     data['hero'] = hero_data
 
-    fileObject = open('{0}/{1}.sav'.format(PATH, hero.name),'wb')
+    fileObject = open('{0}/saves/{1}.sav'.format(PATH, hero.name),'wb')
     success = pickle.dump(data, fileObject, pickle.HIGHEST_PROTOCOL)
     fileObject.close()
     return success
