@@ -48,3 +48,4 @@ Temporary Items
 *.pyc
 logs/story.html
 logs/debug.log
+*.sav
