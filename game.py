@@ -95,7 +95,7 @@ class Game(object):
         if boss:
             log.info("Monster :: Generate Boss")
             log.debug("Monster :: Boss info ::\n {}".format(boss))
-            lvl = boss['lvl']
+            lvl = self.hero.lvl # boss['lvl']
             strength = boss['strength']
             modifier += 2 * strength
             hitpoints = int((lvl ** 1.3) * 7) + 15
@@ -504,8 +504,6 @@ class Game(object):
             # reset turn counter
             self.wait = -1
 
-        
-
     def handleMoving(self, channel, docks):
         # default message
         message = ""
@@ -637,8 +635,8 @@ class Game(object):
                     unique = True
                     
                 hlvl = self.hero.lvl
-                lvl = choice([hlvl-1, hlvl-1, hlvl-1, hlvl, hlvl, hlvl, hlvl, hlvl, hlvl, hlvl+1])
-                message = self.generateEnnemy(lvl, unique)
+                #lvl = choice([hlvl-1, hlvl-1, hlvl-1, hlvl, hlvl, hlvl, hlvl, hlvl, hlvl, hlvl+1])
+                message = self.generateEnnemy(hlvl, unique)
                 if message:
                     message = message.format(hero=self.hero.name, creature=self.ennemy['name'])
                     channel.addStory(message)
@@ -693,9 +691,9 @@ class Game(object):
                     if dice > 99:
                         unique = True
                     hlvl = self.hero.lvl
-                    lvl = choice([hlvl-1, hlvl-1, hlvl, hlvl, hlvl, hlvl, hlvl+1, hlvl+1])
-                    log.debug("Dungeon :: Monster level chosen :: {}".format(lvl))
-                    message = self.generateEnnemy(lvl, unique, monster_list=self.dungeon['monsters'])
+                    #lvl = choice([hlvl-1, hlvl-1, hlvl, hlvl, hlvl, hlvl, hlvl+1, hlvl+1])
+                    #log.debug("Dungeon :: Monster level chosen :: {}".format(lvl))
+                    message = self.generateEnnemy(hlvl, unique, monster_list=self.dungeon['monsters'])
                     if message:
                         message = message.format(hero=self.hero.name, creature=self.ennemy['name'])
                         channel.addStory(message)
