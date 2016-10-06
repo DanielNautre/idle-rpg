@@ -317,6 +317,9 @@ class Game(object):
         channel.addStory(message)
 
     def handleCombat(self, channel, docks):
+        self.wait += 1
+
+        # Hero's turn
         if self.wait == 0:
             # Hero's turn
             skill_to_use = self.hero.bestSkill(self.ennemy['hitpoints'], self.ennemy['weakness'])
@@ -402,14 +405,20 @@ class Game(object):
                 if skill_to_use != 'weapon':
                     if oskill_list[skill_to_use]['type'] == "Fire":
                         if d100() > 90:
-                            self.ennemy['effects']['Burned'] = 1
+                            self.ennemy['effects']['Burning'] = 1
+                            log.debug("Combat :: Burning effect was applied")
+                    if oskill_list[skill_to_use]['type'] == "Poison":
+                        if d100() > 90:
+                            self.ennemy['effects']['Poison'] = 2
+                            log.debug("Combat :: Poison effect was applied")
                     if oskill_list[skill_to_use]['type'] == "Electric":
                         if d100() > 90:
-                            pass
-                self.ennemy['effects']['Stunned'] = 1
-                message = s['stunned'].format(hero=self.hero.name, creature=self.ennemy['name'])
-                channel.addStory(message) 
-                log.debug("Combat :: Stunned effect was applied")
+                            self.ennemy['effects']['Weakness'] = 1
+                            log.debug("Combat :: Weakness effect was applied")
+                    if oskill_list[skill_to_use]['type'] == "Ice":
+                        if d100() > 90:
+                            self.ennemy['effects']['Stun'] = 1
+                            log.debug("Combat :: Stun effect was applied")
 
                 if self.ennemy['taunt']:
                     dice = d20()
@@ -418,7 +427,7 @@ class Game(object):
                         taunt = taunt.format(name=self.hero.name)
                         message = "<b>{0}<b/> <i>{1}</i>".format(self.ennemy['name'], taunt)
                         channel.addStory(message) 
-
+        # Creature's turn
         elif self.wait == 1:
             # Creature's turn
 
@@ -430,8 +439,10 @@ class Game(object):
             log.debug("Combat :: Block dice :: {}".format(dice))
 
             # If the Creature is stunned skip its turn
-            if 'Stunned' in self.ennemy['effects']:
+            if 'Stun' in self.ennemy['effects']:
                 log.info("Combat :: Ennemy is Stunned and can't attack this turn")
+                message = s['stunned'].format(hero=self.hero.name, creature=self.ennemy['name'])
+                channel.addStory(message) 
             elif dice > self.hero.block_chance:
                 dice = d20()
                 log.debug("Combat :: Crit dice :: {}".format(dice))
@@ -464,7 +475,6 @@ class Game(object):
 
                 log.debug("Combat :: Armor / Absorbtion :: {0}, {1}".format(self.hero.armor, absorbtion))
                 log.debug("Combat :: Ennemy hits (raw, min, final) :: {0}, {1}, {2}".format(raw_damage, min_damage, nmy_damage))
-
             else:
                 message = s['blocked'][self.hero.job]
                 message = message.format(creature=self.ennemy['name'], hero=self.hero.name)
@@ -492,9 +502,9 @@ class Game(object):
             self.damage_taken += nmy_damage
 
             # reset turn counter
-            self.wait = 0
+            self.wait = -1
 
-        self.wait += 1
+        
 
     def handleMoving(self, channel, docks):
         # default message

@@ -60,5 +60,8 @@
     "no_loot": "the loot was too damaged to be worth anything",
     "found_potion": "{hero} found a {potion}",
     "found_potion_no_space":"{hero} found a {potion} but has no room to carry it",
-    "stunned": "{creature} was stunned"
+    "stunned": "{creature} is stunned and cannot attack {hero}",
+    "burning": "{creature} was set on fire",
+    "weakened": "{creature} was weakened by {hero}'s spell",
+    "poisonded": "{creature} was poisonned"
 }
