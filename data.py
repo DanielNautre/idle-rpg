@@ -41,7 +41,7 @@ with open('{}/data/prefix.json'.format(PATH)) as file:
     prefix = load(file)
 
 
-empty_dungeon = {'id':None, 'name':None, 'unique':None, 'monsters':None, 'unique_monster':None, 'rooms', 'last_chamber':None}
+empty_dungeon = {'id':None, 'name':None, 'unique':None, 'monsters':None, 'unique_monster':None, 'rooms':None, 'last_chamber':None}
 empty_ennemy = {'lvl':None,'hitpoints':None,'name':None,'loot':None,'type':None,'strength':None,'weakness':None,'unique':None,'death':None,'taunt':None,'effects':None}
 
 pronouns = {'male': {'he':'he', 'him':'him', 'his':'his'}, 'female': {'he':'she','him':'her','his':'her'}}

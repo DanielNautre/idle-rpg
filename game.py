@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*
 
 from random import choice, randint
+from collections import defaultdict
 
 import operator
 
@@ -154,6 +155,7 @@ class Game(object):
         self.ennemy['unique'] = modifier
         self.ennemy['death'] = death_message
         self.ennemy['taunt'] = taunt
+        self.ennemy['effects'] = defaultdict(list)
 
         return message
 
@@ -396,6 +398,19 @@ class Game(object):
                 message = hit_string.format(hero=self.hero.name, creature=self.ennemy['name'], damage=damage)
                 channel.addStory(message)
 
+                # If the creature survives, check if the skill created any effect
+                if skill_to_use != 'weapon':
+                    if oskill_list[skill_to_use]['type'] == "Fire":
+                        if d100() > 90:
+                            self.ennemy['effects']['Burned'] = 1
+                    if oskill_list[skill_to_use]['type'] == "Electric":
+                        if d100() > 90:
+                            pass
+                self.ennemy['effects']['Stunned'] = 1
+                message = s['stunned'].format(hero=self.hero.name, creature=self.ennemy['name'])
+                channel.addStory(message) 
+                log.debug("Combat :: Stunned effect was applied")
+
                 if self.ennemy['taunt']:
                     dice = d20()
                     if dice >= 19:
@@ -404,26 +419,19 @@ class Game(object):
                         message = "<b>{0}<b/> <i>{1}</i>".format(self.ennemy['name'], taunt)
                         channel.addStory(message) 
 
-                # If the creature survives, check if the skill created any effect
-                if skill_to_use != 'weapon':
-                    if oskill_list[skill_to_use]['type'] == "Fire":
-                        if d100() > 90:
-                            self.ennemy['effect'].append(['Burning', 1])
-                    if oskill_list[skill_to_use]['type'] == "Electric":
-                        if d100() > 90:
-                            self.ennemy['effect'].append(['Stunned', 1])
-
-
         elif self.wait == 1:
             # Creature's turn
-             
+
+            nmy_damage = 0
+            log.debug("Combat :: List of debuffs on the creature ::\n{}".format(self.ennemy['effects']))
+
             # the creature tries an attack and the hero tries to block it
             dice = d100()
             log.debug("Combat :: Block dice :: {}".format(dice))
 
             # If the Creature is stunned skip its turn
-            if False:
-                pass
+            if 'Stunned' in self.ennemy['effects']:
+                log.info("Combat :: Ennemy is Stunned and can't attack this turn")
             elif dice > self.hero.block_chance:
                 dice = d20()
                 log.debug("Combat :: Crit dice :: {}".format(dice))
@@ -458,7 +466,6 @@ class Game(object):
                 log.debug("Combat :: Ennemy hits (raw, min, final) :: {0}, {1}, {2}".format(raw_damage, min_damage, nmy_damage))
 
             else:
-                nmy_damage = 0
                 message = s['blocked'][self.hero.job]
                 message = message.format(creature=self.ennemy['name'], hero=self.hero.name)
                 channel.addStory(message)
@@ -466,8 +473,20 @@ class Game(object):
                 log.info("Combat :: Blocked attack")
 
             # Apply any damage effect to the creature
-            if len(self.ennemy['effects']):
-                pass
+            if 'Burning' in self.ennemy['effects']:
+                log.info("Combat :: Ennemy is burning and looses health")
+
+            marked = []
+
+            for debuff in self.ennemy['effects']:
+                self.ennemy['effects'][debuff] -= 1
+                if self.ennemy['effects'][debuff] == 0:
+                    marked.append(debuff)
+
+            log.debug("Combat :: Debuff marked for deletion {}".format(marked))
+
+            for debuff in marked:
+                del(self.ennemy['effects'][debuff])
 
             # increment stats
             self.damage_taken += nmy_damage

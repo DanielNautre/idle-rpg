@@ -59,5 +59,6 @@
     "mpotion_restocked": "{hero} acquires <b>{nb}</b> {type} to help {him} fight evil",
     "no_loot": "the loot was too damaged to be worth anything",
     "found_potion": "{hero} found a {potion}",
-    "found_potion_no_space":"{hero} found a {potion} but has no room to carry it"
+    "found_potion_no_space":"{hero} found a {potion} but has no room to carry it",
+    "stunned": "{creature} was stunned"
 }
