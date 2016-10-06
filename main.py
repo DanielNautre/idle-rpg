@@ -31,7 +31,7 @@ def main():
 
     # setup timer for the game tick (1 tick per 2 seconds)
     timer = QTimer()
-    timer.start(1000)
+    timer.start(1500)
     timer.timeout.connect(idlerpg.tick)
 
     idlerpg.show() 
