@@ -1,0 +1,65 @@
+{
+    "morgul": {
+        "name": "Morgul", 
+        "weakness": "",
+        "type": "demon",
+        "lvl": [8, 9], 
+        "strength": 1,
+        "taunt": {
+            "Wizard": ["Your spells can do nothing against me"],
+            "Archer": ["Prepare to die"],
+            "Paladin": ["I will crush you"]
+        },
+        "death": {
+            "Wizard": "Morgul is no longer, no one will mourn his passing",
+            "Archer": "Morgul is no longer, no one will mourn his passing",
+            "Paladin": "Morgul is no longer, no one will mourn his passing"
+        },
+        "loot": {
+            "name": "Morgul's Spine",
+            "desc": "He doesn't need it anymore, but we can make good use of it",
+            "type": "weapon",
+            "subtype": "flail",
+            "lvl": "9",
+            "damage_min": "9",
+            "damage_max": "15",
+            "enchanted": true
+        }
+    }, 
+    "jock": {
+        "name": "Jock the Weak", 
+        "weakness": "",
+        "type": "demon",
+        "lvl": [1, 2], 
+        "strength": 0.1,
+        "taunt": {
+            "Wizard": ["Your spells can do nothing against me"],
+            "Archer": ["Prepare to die"],
+            "Paladin": ["I will crush you"]
+        },
+        "death": {
+            "Wizard": "",
+            "Archer": "",
+            "Paladin": ""
+        },
+        "loot": null
+    }, 
+    "samy": {
+        "name": "Samy the Fool", 
+        "weakness": "",
+        "type": "demon",
+        "lvl": [1, 2], 
+        "strength": 0.4,
+        "taunt": {
+            "Wizard": ["Your spells can do nothing against me"],
+            "Archer": ["Prepare to die"],
+            "Paladin": ["I will crush you"]
+        },
+        "death": {
+            "Wizard": "",
+            "Archer": "",
+            "Paladin": ""
+        },
+        "loot": null
+    }
+}

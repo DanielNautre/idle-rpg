@@ -1,0 +1,89 @@
+{
+    "damage": {
+        "Jagged ": [1, 20],
+        "Sharp ": [1,20],
+        "Vicious ": [21, 40],
+        "Deadly ": [41, 60],
+        "Brutal ": [61, 80],
+        "Massive ": [81,100],
+        "Savage ": [101, 120],
+        "Ferocious ": [1,1],
+        "Ruthless ": [121, 140],
+        "Merciless ": [141, 160],
+        "Cruel ": [1,1]
+    },
+    "mag_damage": {
+        "Crimson ": [121, 140],
+        "Burning ": [1, 20],
+        "Prismatic ": [141, 160],
+        "Blazing ": [1,20],
+        "Shimmering ": [1,1],
+        "Sparkling ": [41, 60],
+        "Spiritual ": [21, 40],
+        "Powered ": [61, 80],
+        "Volcanic ": [81,100],
+        "Charged ": [101, 120],
+        "Cristalline ": [161, 180]
+    },
+    "armor": {
+        "Fine ": [1, 20],
+        "Sturdy ": [1,1],
+        "Strong ": [21, 40],
+        "Grand ": [41, 60],
+        "Valiant ": [61, 80],
+        "Glorious ": [81,100],
+        "Blessed ": [101, 120],
+        "Saintly ": [121, 140],
+        "Awesome ": [141, 160],
+        "Holy ": [161, 180],
+        "Godly ": [181, 200]
+    },
+    "life": {
+        "Vulture's ": [1, 20],
+        "Jackal's ": [1, 20],
+        "Fox's ": [1, 20],
+        "Jaguar's ": [1, 20],
+        "Eagle's ": [1, 20],
+        "Wolf's ": [1, 20],
+        "Tiger's ": [1, 20],
+        "Lion's ": [1, 20],
+        "Mammoth's ": [1, 20],
+        "Whale's ": [1, 20],
+        "Colossus's ": [1, 20]
+    },
+    "mana": {
+        "Frog's ": [1, 20],
+        "Hyena's ": [1, 20],
+        "Spider's ": [1, 20],
+        "Raven's ": [1, 20],
+        "Snake's ": [1, 20],
+        "Serpent's ": [1, 20],
+        "Drake's ": [1, 20],
+        "Dragon's ": [1, 20],
+        "Wyrm's ": [1, 20],
+        "Great Wyrm's ": [1, 20],
+        "Bahamut's ": [1, 20]
+    },
+    "life_regen": {
+        "Lapis ": [1, 20],
+        "Topaz ": [1, 20],
+        "Pearl": [1, 20],
+        "Jade ": [1, 20],
+        "Sapphire ": [1, 20],
+        "Ruby ": [1, 20],
+        "Diamond ": [1, 20]
+    },
+    "mana_regen": {
+        "Sacred ": [1, 20],
+        "Consecrated ": [1, 20],
+        "Pure ": [1, 20],
+        "Astral ": [1, 20],
+        "Celestial ": [1, 20],
+        "Hallowed ": [1, 20],
+        "Divine ": [1, 20]
+    },
+    "gold": {
+        "Greedy ": [1, 50],
+        "Wealthy ": [51, 100]
+    }
+}

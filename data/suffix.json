@@ -1,0 +1,41 @@
+{
+    "dex": {
+        " of Dexterity": [1,20],
+        " of Skill": [1,20],
+        " of Accuracy": [1,20],
+        " of Precision": [1,20],
+        " of Perfection": [1,20],
+        " of Nirvana": [1,20]
+    },
+    "str": {
+        " of Strength": [1,5],
+        " of Might": [5,15],
+        " of Ox": [15,25],
+        " of Giant": [25,35],
+        " of Titan": [35,45],
+        " of Atlas": [45,55]
+    },
+    "int": {
+        " of Magic": [1,20],
+        " of Energy": [1,20],
+        " of the Mind": [1,20],
+        " of Brilliance": [1,20],
+        " of Sorcery": [1,20],
+        " of Wizardry": [1,20],
+        " Of Enlightenment": [1,20]
+    },
+    "vit":{
+        " of Vitality": [1,20],
+        " of Zest": [1,20],
+        " of Vim": [1,20],
+        " of Vigor": [1,20],
+        " of Life": [1,20]
+    },
+    "all": {
+        " of the Sky": [1,20],
+        " of the Moon": [1,20],
+        " of the Star": [1,20],
+        " of the Heavens": [1,20],
+        " of the Zodiac": [1,20]
+    }
+}

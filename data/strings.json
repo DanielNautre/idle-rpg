@@ -1,0 +1,63 @@
+{
+    "blocked":{
+        "Archer" : "{hero} evades the attack from {creature}",
+        "Paladin" : "{creature} attacks but {hero} blocks",
+        "Wizard" : "{creature} attacks but {hero} blocks"
+        },
+    "lvl_up": {
+        "Archer": [
+            "{hero} gains a level", 
+            "{hero} training pays, {he} gains a level", 
+            "{hero} levels up"
+            ],
+        "Paladin": [
+            "{hero} gains a level", 
+            "Light shines on {hero} who gains a level",
+            "{hero} levels up"
+            ],
+        "Wizard": [
+            "{hero} gains a level", 
+            "{hero} levels up",
+            "{hero}'s wisdom increases"
+            ]
+        } ,
+    "kill": [
+        "{creature} was killed by {hero}",
+        "{creature} was maimed by {hero}",
+        "{creature} was crushed by {hero}",
+        "{hero} ended {creature}",
+        "{hero} vanquished {creature}",
+        "{hero} defeated {creature}",
+        "{hero} sliced {creature} into pieces"
+        ],
+    "wake": "The sun shine through {hero}'s window and wakes {him} up",
+    "leave_home": "{hero} begins {his} long journey to fight the forces of evil", 
+    "healer": "{hero} visits the Elizabeth the Healer who heals {him}",  
+    "healer_mana": "The town's enchanter restores {hero}'s mana",
+    "resume": "{hero} resume {his} journey to defeat evil",
+    "discover_dungeon": "{hero} discovers a dungeon and ventures into the {dungeon}",
+    "cleared_dungeon": "{hero} cleared {dungeon} and returns to the {fields}",
+    "hit": ["{hero} hits {creature} and causes <b style='color:#F5EE17'>{damage:.1f}</b> damage"],
+    "xp_earned": "{hero} gains <b style='color:blue'>{gold}</b> gold and <b style='color:blue'>{xp}</b> XP",
+    "hero_hit": "{creature}{crit} hits {hero} and deals <b style='color:red'>{dam}</b> damage",
+    "gibberish": "{hero} finds a book full of gibberish and throws it away",
+    "new_spell": "{hero} finds a ancient tome and learns {spell}",
+    "improved_spell": "{hero} finds a tome of {spell} and improves {his} knowledge",
+    "spawn": "{creature} appears and attacks {hero}",
+    "spawn_champ": "{creature} appears and attacks {hero}",
+    "spawn_boss":"{creature} awaits him there",
+    "last_room": "{hero} enters the {room}",
+    "hero_killed": "{hero} was killed",
+    "hurt": "{hero} is hurt and has no healing potions left",
+    "health_potion": "{hero} drinks a health potion and restores <b style='color:green'>{restore}</b> health",    
+    "mana_potion": "{hero} drinks a mana potion and restores <b style='color:green'>{restore}</b> mana",
+    "new_item": "{hero} found <b>{item}</b> and equips it",
+    "crap_item": "{hero} found an item but decides to sell it later",
+    "sell_item": "{hero} sells all {his} useless items and earns <b style='color:blue'>{gold}</b>",
+    "found_chest": "{hero} discovers a chest and opens it",
+    "hpotion_restocked": "{hero} buys <b>{nb}</b> {type} to help {him} stay healthy during {his} fights",
+    "mpotion_restocked": "{hero} acquires <b>{nb}</b> {type} to help {him} fight evil",
+    "no_loot": "the loot was too damaged to be worth anything",
+    "found_potion": "{hero} found a {potion}",
+    "found_potion_no_space":"{hero} found a {potion} but has no room to carry it"
+}

@@ -1,0 +1,186 @@
+{
+    "rat": {
+        "name": "Rat", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [1,3], 
+        "strength": 0.2,
+        "loot": null
+    },
+    "cockroach": {
+        "name": "Cockroach", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [1,2], 
+        "strength": 0.1,
+        "loot": null
+    },
+    "small-spider": {
+        "name": "Small Spider", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [1,2], 
+        "strength": 0.3,
+        "loot": null
+    },
+    "thief": {
+        "name": "Thief", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [1,3], 
+        "strength": 0.2,
+        "loot": null
+    },
+    "scavenger": {
+        "name": "Scavenger", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [2,4], 
+        "strength": 0.4,
+        "loot": null
+    },
+    "bat": {
+        "name": "Bat", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [1,4], 
+        "strength": 0.1,
+        "loot": null
+    },     
+    "zombie": {
+        "name": "Zombie", 
+        "weakness": "",
+        "type": "Undead",
+        "lvl": [3,Infinity], 
+        "strength": 0.4,
+        "loot": null
+    }, 
+    "zombie_torso": {
+        "name": "Zombie Torso", 
+        "weakness": "",
+        "type": "Undead",
+        "lvl": [2,8], 
+        "strength": 0.3,
+        "loot": null
+    },  
+    "skeleton": {
+        "name": "Skeleton", 
+        "weakness": "",
+        "type": "Undead",
+        "lvl": [3,Infinity], 
+        "strength": 0.5,
+        "loot": null
+    }, 
+    "skeleton_archer": {
+        "name": "Skeleton Archer", 
+        "weakness": "",
+        "type": "Undead",
+        "lvl": [4, Infinity], 
+        "strength": 0.6,
+        "loot": null
+    },
+    "crawler": {
+        "name": "Crawler", 
+        "weakness": "",
+        "type": "Demon",
+        "lvl": [5,Infinity], 
+        "strength": 0.3,
+        "loot": null
+    },
+    "fallen": {
+        "name": "Fallen", 
+        "weakness": "",
+        "type": "Demon",
+        "lvl": [5,Infinity], 
+        "strength": 0.4,
+        "loot": null
+    },
+    "fallen_shaman": {
+        "name": "Fallen Shaman", 
+        "weakness": "",
+        "type": "Demon",
+        "lvl": [5,Infinity], 
+        "strength": 0.6,
+        "loot": null
+    },
+    "wolf": {
+        "name": "Wolf", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [5,10], 
+        "strength": 0.4,
+        "loot": null
+    },
+    "bear": {
+        "name": "Bear", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [6,12], 
+        "strength": 0.6,
+        "loot": null
+    },
+    "ghoul": {
+        "name": "Ghoul", 
+        "weakness": "",
+        "type": "Undead",
+        "lvl": [7,Infinity], 
+        "strength": 0.5,
+        "loot": null
+    },
+    "savage_houl": {
+        "name": "Savage Ghoul", 
+        "weakness": "",
+        "type": "Undead",
+        "lvl": [7,Infinity], 
+        "strength": 0.6,
+        "loot": null
+    },
+    "electric_eel": {
+        "name": "Electric Eel", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [8,15], 
+        "strength": 0.2,
+        "loot": null
+    },  
+    "goatman": {
+        "name": "Goatman", 
+        "weakness": "",
+        "type": "Animal",
+        "lvl": [15,Infinity], 
+        "strength": 0.5,
+        "loot": null
+    },
+    "demon": {
+        "name": "Demon", 
+        "weakness": "",
+        "type": "Demon",
+        "lvl": [20,Infinity], 
+        "strength": 0.7,
+        "loot": null
+    },
+    "balrog": {
+        "name": "Balrog", 
+        "weakness": "",
+        "type": "Demon",
+        "lvl": [21,Infinity], 
+        "strength": 0.6,
+        "loot": null
+    },
+    "boneater": {
+        "name": "Bone Eater", 
+        "weakness": "",
+        "type": "Demon",
+        "lvl": [25,Infinity], 
+        "strength": 0.5,
+        "loot": null
+    },
+    "hell_knight": {
+        "name": "Hellish Knight", 
+        "weakness": "",
+        "type": "Demon",
+        "lvl": [35,Infinity], 
+        "strength": 0.6,
+        "loot": null
+    }
+}

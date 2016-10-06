@@ -1,0 +1,294 @@
+#!/usr/bin/python3
+# -*- coding: utf8 -*
+
+import sys, pickle
+from random import choice
+
+# Import other files from the project
+from dice import d6, d20, d100
+from hero import Hero
+from item import Item
+from game import Game
+
+# Import logger
+from logger import log, story
+
+from widgets import HeroSelection, Adventure, HeroStats, EnnemyStats, NoEnnemyStats, GameStats, GearStats, BeltDisplay, SkillDisplay, PATH
+
+# Import Graphic Lib
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QToolTip, QPushButton, 
+    QWidget, QStackedWidget, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, 
+    QFormLayout, QDockWidget, QListWidget, QListWidgetItem, QAction, qApp, 
+    QButtonGroup, QProgressBar, QSpacerItem, QStatusBar)
+from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtGui import QFont, QIcon
+
+# Import config & data
+from data import s
+
+
+def save(game, hero):
+    game_data = {}
+    hero_data = {}
+
+    data = {}
+
+    # Stats
+    game_data['kills'] = game.kills
+    game_data['damage_dealt'] = game.damage_dealt
+    game_data['damage_taken'] = game.damage_taken
+    game_data['hpotion_taken'] = game.hpotion_taken
+    game_data['mpotion_taken'] = game.mpotion_taken
+    game_data['spell_cast'] = game.spell_cast
+    game_data['dungeon_cleared'] = game.dungeon_cleared
+    game_data['unique_kills'] = game.unique_kills
+    game_data['xp_earned'] = game.xp_earned
+    game_data['gold_earned'] = game.gold_earned
+    game_data['chest_opened'] = game.chest_opened
+    game_data['item_found'] = game.item_found
+    game_data['killed_champ'] = game.killed_champ
+    game_data['finished_dungeon'] = game.finished_dungeon
+    game_data['skill_usage'] = game.skill_usage
+
+    # Hero values
+    hero_data['name'] = hero.name
+    hero_data['lvl'] = hero.lvl
+    hero_data['xp'] = hero.xp
+    hero_data['next_lvl'] = hero.next_lvl
+    hero_data['job'] = hero.job
+    hero_data['gold'] = hero.gold
+    hero_data['sell_value'] = hero.sell_value
+    hero_data['hpotion_belt'] = hero.hpotion_belt
+    hero_data['mpotion_belt'] = hero.mpotion_belt
+    hero_data['offensive_skills'] = hero.offensive_skills
+    hero_data['base_intelligence'] = hero.base_intelligence
+    hero_data['base_strength'] = hero.base_strength
+    hero_data['base_dexterity'] = hero.base_dexterity
+    hero_data['base_vitality'] = hero.base_vitality
+    hero_data['armor_eff'] = hero.armor_eff
+    hero_data['main'] = hero.main
+    hero_data['gear'] = hero.gear
+    hero_data['healing_modifier'] = hero.healing_modifier
+    hero_data['mana_modifier'] = hero.mana_modifier
+    hero_data['base_blocking'] = hero.base_blocking
+    hero_data['health'] = hero.health
+    hero_data['mana'] = hero.mana
+
+    # Game values
+    game_data['location'] = game.location
+    game_data['dungeon'] = game.dungeon
+    game_data['ennemy'] = game.ennemy
+
+    data['game'] = game_data
+    data['hero'] = hero_data
+
+    fileObject = open('{0}/{1}.sav'.format(PATH, hero.name),'wb')
+    success = pickle.dump(data, fileObject, pickle.HIGHEST_PROTOCOL)
+    fileObject.close()
+    return success
+
+def load():
+    pass
+
+class IdleRPG(QMainWindow):
+    def __init__(self, game):
+        super(IdleRPG, self).__init__()
+        self.initUI()
+        self.game = game
+        self.ticks = 0
+
+    def initUI(self):
+        self.setGeometry(50,50,1024,620)
+        self.setWindowTitle('Idle RPG')
+
+        self.statusBar = QStatusBar()
+        self.setStatusBar(self.statusBar)
+
+        # Create actions
+        
+        action_exit = QAction(QIcon('exit.png'), '&Exit', self)
+        action_exit.setShortcut('Ctrl+Q')
+        action_exit.setStatusTip('Leave the Game')
+        action_exit.triggered.connect(qApp.quit)
+
+        action_reset = QAction(QIcon('exit.png'), '&Reset Docks', self)
+        action_reset.setShortcut('Ctrl+R')
+        action_reset.setStatusTip('Reset Docks to their initial position')
+        action_reset.triggered.connect(self.resetDocks) 
+
+        # Create the Status Bar
+        menubar = self.menuBar()
+        menu_file = menubar.addMenu('&File')
+        menu_file.addAction(action_exit)
+        menu_view = menubar.addMenu('&View')
+        menu_view.addAction(action_reset)
+        #menu_about = menubar.addMenu('&About')
+
+        self.stack = QStackedWidget(self)
+        
+        hero_selection = HeroSelection(self)
+        self.stack.addWidget(hero_selection)
+        self.setCentralWidget(self.stack)
+
+        hero_selection.btn_create.pressed.connect(lambda:self.startGame(hero_selection))
+
+    def startGame(self, hero_val):
+        hero_val.name = hero_val.edit_name.text()
+
+        if not hero_val.name or not hero_val.job or not hero_val.gender:
+            return
+
+        # Create the hero and start the game
+        log.info("Start :: Creating new Hero")
+        log.debug("Start :: Name: {0}, Gender: {1}, Class: {2}".format(hero_val.name, hero_val.gender, hero_val.job))
+        self.hero = Hero(hero_val.job, hero_val.gender, hero_val.name)
+        self.game.started = True
+        self.game.hero = self.hero
+
+        # switch the interface to the adventure one
+        self.adventure = Adventure(self)
+        self.stack.addWidget(self.adventure)
+        self.stack.setCurrentIndex(1)
+
+        # Create Docks
+        self.docks = {}
+        self.docks['stats'] = QDockWidget("Hero's Stats", self) 
+        self.docks['gear'] = QDockWidget("Equipped Gear", self)
+        self.docks['ennemy'] = QDockWidget("Ennemy's Stats", self)
+        self.docks['game_stats'] = QDockWidget("Game Stats", self)
+
+        self.widget_hero_stats = HeroStats(self)
+        self.widget_game_stats = GameStats(self)
+        self.widget_gear_stats = GearStats(self)
+
+        self.docks['stats'].setWidget(self.widget_hero_stats)
+        self.docks['gear'].setWidget(self.widget_gear_stats)
+        self.docks['ennemy'].setWidget(NoEnnemyStats())
+        self.docks['game_stats'].setWidget(self.widget_game_stats)
+
+        self.docks['gear'].setFloating(False)
+        self.docks['stats'].setFloating(False)
+        self.docks['ennemy'].setFloating(False)
+        self.docks['game_stats'].setFloating(False)
+   
+
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.docks['stats'])
+        self.addDockWidget(Qt.RightDockWidgetArea, self.docks['gear'])
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.docks['ennemy'])
+        self.tabifyDockWidget(self.docks['gear'], self.docks['game_stats'])
+
+    def resetDocks(self):
+        if not self.game.started:
+            return
+
+        # show
+        self.docks['gear'].show()
+        self.docks['stats'].show()
+        self.docks['ennemy'].show()
+        self.docks['game_stats'].show()
+
+        # dock
+        self.docks['gear'].setFloating(False)
+        self.docks['stats'].setFloating(False)
+        self.docks['ennemy'].setFloating(False)
+        self.docks['game_stats'].setFloating(False)
+   
+        # place
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.docks['stats'])
+        self.addDockWidget(Qt.RightDockWidgetArea, self.docks['gear'])
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.docks['ennemy'])
+        self.tabifyDockWidget(self.docks['gear'], self.docks['game_stats'])
+        self.docks['gear'].raise_()
+
+    def tick(self):
+        if not self.game.started:
+            return False
+
+        if self.game.inCombat():
+            self.game.handleCombat(self.adventure, self.docks)
+        else:
+            self.game.handleMoving(self.adventure, self.docks)
+
+        if self.hero.health == 0:
+            self.game.started = False
+            message = s['hero_killed'].format(hero=self.hero.name)
+            self.adventure.addStory(message)
+            log.info("Game :: Hero Deceased")
+            return
+
+        if self.hero.xp >= self.hero.next_lvl:
+            message = self.hero.lvlUp()
+            message = message.format(hero=self.hero.name, he=self.hero.pronoun('he'))
+            self.adventure.addStory(message)
+            self.adventure.updateSkills()
+
+        # before trying to heal check if we go back to town
+        
+        if (self.hero.needsHPotion() or self.hero.needsMPotion()) and not self.game.inCombat():
+            self.game.returnToTown()
+
+
+        if self.hero.healthLow() and not self.game.location == 'town':
+            log.info("Game :: Healing required")
+            success = self.hero.heal('potion')
+            if not success:
+                if self.game.inCombat():
+                    message = s['hurt'].format(hero=self.hero.name)
+                    self.adventure.addStory(message)
+                else:
+                    self.game.returnToTown()
+            else:
+                message = s['health_potion'].format(hero=self.hero.name, restore=success)
+                self.adventure.addStory(message)
+                self.adventure.updateBelt()
+                # update stats
+                self.game.hpotion_taken += 1
+                log.info("Game :: Consumed 1 Health potion")
+
+        if self.hero.manaLow() and not self.game.location == 'town':
+            success = self.hero.mana_restore('potion')
+            
+            if not success:
+                if self.game.inCombat():
+                    pass
+                elif self.hero.job == 'Wizard':
+                    # Only a Wizard runs back to town to buy Mana
+                    self.game.returnToTown()
+            else:
+                message = s['mana_potion'].format(hero=self.hero.name, restore=success)
+                self.adventure.addStory(message)
+                self.adventure.updateBelt()
+                # update stats
+                self.game.mpotion_taken += 1
+                log.info("Game :: Consumed 1 Mana potion")
+
+        # recalculate hero stats needed only in those cases
+        # - lvl up
+        # - new gear
+
+        self.hero.regen()
+
+        self.hero.addGearAttBonus()
+        self.hero.deriveSecondaryStats()
+
+        #update the bars each tick
+        self.adventure.updateBars()
+        self.widget_hero_stats.updateStats()
+        self.widget_game_stats.updateStats()
+        self.widget_gear_stats.updateStats()
+        if self.game.inCombat():
+            ennemy_widget = self.docks['ennemy'].widget()
+            ennemy_widget.updateStats()
+
+        self.statusBar.showMessage("Time passed: {0}s".format(self.ticks * 2))
+        self.ticks += 1
+
+        if self.ticks % 30 == 0:
+            if save(self.game, self.hero):
+                self.statusBar.showMessage("Game Saved")
+
+
+        #log.debug("Ennemy:\n{}".format(self.game.ennemy))
+        #log.debug("Dungeon:\n{}".format(self.game.dungeon))
+        #log.debug("Hero:\n{}".format(self.hero))
+        log.info("==== End of tick {} ====".format(self.ticks))

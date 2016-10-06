@@ -1,0 +1,51 @@
+DONE    - resell old equipment if hero equips better one
+DONE    - return to town if low on mana and no mana potion
+DONE    - buy only potions that are needed, distribute budget with that in mind
+DONE    -- Wizard buys more mana
+DONE    -- others buy more health
+DONE    -- don't buy too much potions if belt is already full
+DONE    - take into account nb of potions left before buying
+DONE    - add stats for nb of items found
+DONE    - rebalanced armor
+DONE    - verify loot too damaged message (should only occur if loot generated is the wrong type for the hero)
+DONE    - allow player to return to dungeon after going to town
+DONE    - add stats for trips to town
+DONE    - improve logic of dungeon and monster generation (list all posible dungeon/monster than pick from list)
+DONE    - verify weapon drop for wizard
+DONE    - drink mana or health if potion plus current value < max value
+DONE    - Go back to town if no potion left and enough money to buy
+DONE    - buff evasion for starter archer (higher base block value)
+DONE    - correct block tooltip (remove base block value, or display it differently)
+DONE    - bar tooltip update doesn't work
+DONE    - item found get added to the resell value even if they are kept
+DONE    - improve logging system
+DONE    - block doesn't seem to be taken into account properly
+DONE    - add way to add a tooltip to channel messages
+DONE    - bonus to all does not work properly
+DONE    - fix skill selection to maximize damage if can't oneshot
+DONE    - skill diplay under the channel (tabed ?)
+DONE    -- Display skill name, min and max damage
+DONE    - moves config and data imports to it's own file
+TRY     - bonus armor does not work
+TRY     - belt display under the channel
+TRY     -- Display potion name and value
+TRY     - gold gain gets out of control quickly
+TRY     - add bonus damage depending on ennemy type / weakness
+TRY     - yellow used for damaged caused is too bright
+TRY     - take healing and mana modifiers in consideration for potion type selection
+TRY     - change enchant generation (and naming) for more variety
+TRY     - show correct value for potions in the tooltip (taking modifier into account)
+TRY     - split combat in two phase (Hero and creature have each their own turn)
+TRY     - boss and champions may taunt the hero (boss always do when they spawn)
+- add effect for skill (freeze, burn, etc..)
+- ass strategic skills (freeze, weaken, poison, burn) to soften up a strong mob
+- add Save and Load mechanics
+- improve balance
+- balance items
+- add unique items
+- add more unique strings
+-- unique strings depending on weapon
+- more dungeons, monsters etc...
+- add defensive skills (heal)
+- High level character may drop potion of attribut (+1 random attribut) (Skill, Knowledge, Life, Strength)
+- replace assets with open sourced ones (or specially made for)

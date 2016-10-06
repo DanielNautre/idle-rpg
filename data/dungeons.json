@@ -1,0 +1,186 @@
+{
+    "cellar": {
+        "name": ["Old Cellar", "Cellar", "Dark Cellar", "Damp Cellar", "Rotting Cellar", "Storage Cellar"],
+        "lvl": [1,2,3,4], 
+        "rooms": [3,5], 
+        "monsters": ["rat", "small-spider", "cockroach"],
+        "unique": false, 
+        "unique_monster": false
+    },
+    "thief_camp": {
+        "name": ["Thief Camp", "Stealer's Encampment"],
+        "lvl": [1,2,3], 
+        "rooms": [3,3],
+        "monsters": ["thief", "scavenger"],
+        "unique": false,
+        "unique_monster": false
+    },
+    "house": {
+        "name": ["House", "Abandonned House", "Farmer's House", "Burned House", "Rensacked House"], 
+        "lvl": [1,2,3,4,5,6,7,8], 
+        "rooms": [3,6], 
+        "monsters": ["thief", "rat", "zombie", "scavenger"],
+        "unique": false, 
+        "unique_monster": false
+    },
+    "mill": {
+        "name": ["Broken Mill"], 
+        "lvl": [3,4], 
+        "rooms": [6,7], 
+        "monsters": ["thief", "scavenger"],
+        "unique": true, 
+        "last_chamber": "Milling room",
+        "unique_monster": {
+            "name": "Andric the Miller",
+            "weakness": "",
+            "taunt": {
+                "Paladin": ["The end is nigh for you Paladin"],
+                "Wizard": ["The end is nigh for you Wizard"],
+                "Archer": ["The end is nigh for you Archer"]
+            },
+            "type": "Undead",
+            "lvl": 3, 
+            "strength": 0.6,            
+            "death": {
+                "Wizard": "",
+                "Archer": "",
+                "Paladin": ""
+            },
+            "loot": null
+        }
+    },
+    "butcher": {
+        "name": ["Butcher's house"], 
+        "lvl": [4,5], 
+        "rooms": [7,9], 
+        "monsters": ["thief", "scavenger", "rat"],
+        "unique": true, 
+        "last_chamber": "Milling room",
+        "unique_monster": {
+            "name": "Bernard the Dead Butcher", 
+            "weakness": "",
+            "taunt": {
+                "Paladin": ["The end is nigh for you Paladin"],
+                "Wizard": ["The end is nigh for you Wizard"],
+                "Archer": ["The end is nigh for you Archer"]
+            },
+            "type": "Undead",
+            "lvl": 4, 
+            "strength": 0.7,
+            "death": {
+                "Wizard": "",
+                "Archer": "",
+                "Paladin": ""
+            },
+            "loot": null
+        }
+    },
+    "barn": {
+        "name": ["Abandonned Barn", "Barn", "Rensacked Barn"], 
+        "lvl": [2,3,4], 
+        "rooms": [5,6],
+        "monsters": ["rat"],
+        "unique": false,
+        "unique_monster": false
+    },
+    "cave": {
+        "name": ["Cave", "Ancient Cave", "Mysterious Cave", "Ruined Cave", "Flooded Cave"], 
+        "lvl": [2,4,6,12,14], 
+        "rooms": [7,11], 
+        "monsters": ["zombie", "skeleton", "zombie_torso"],
+        "unique": false, 
+        "unique_monster": false
+    },
+    "cavern": {
+        "name": ["Cavern", "Vile Cavern"], 
+        "lvl": [7,8,10,16,18], 
+        "rooms": [8,15], 
+        "monsters": ["zombie", "skeleton", "zombie_torso", "skeleton_archer"],
+        "unique": false, 
+        "unique_monster": false
+    },
+    "crypt": {
+        "name": ["Crypt", "Dark Crypt", "Decaying Crypt", "Defiled Crypt"], 
+        "lvl": [5,6,7,8], 
+        "rooms": [8,13],
+        "monsters": ["skeleton", "zombie"],
+        "unique": false,
+        "unique_monster": false
+    },
+    "bishop_tomb": {
+        "name": ["Bishop's Tomb"], 
+        "lvl": [5,6], 
+        "rooms": [10,15],
+        "monsters": ["skeleton", "skeleton_archer", "zombie"],
+        "unique": true,
+        "last_chamber": "Bishop's last chamber",
+        "unique_monster": {
+            "name": "The Fallen Bishop",
+            "weakness": "",
+            "taunt": {
+                "Paladin": ["The end is nigh for you Paladin"],
+                "Wizard": ["The end is nigh for you Wizard"],
+                "Archer": ["The end is nigh for you Archer"]
+            },
+            "type": "Undead",
+            "lvl": 5, 
+            "strength": 0.8,
+            "death": {
+                "Wizard": "",
+                "Archer": "",
+                "Paladin": ""
+            },
+            "loot": null
+        }
+    },
+    "camp": {
+        "name": ["Camp", "Encampment", "Abandonned Camp"],
+        "lvl": [6,7,8,9,12,13], 
+        "rooms": [8,10],
+        "monsters": ["crawler", "fallen", "fallen_shaman"],
+        "unique": false,
+        "unique_monster": false
+    },
+    "cabin": {
+        "name": ["Wooden Cabin", "Rotten Cabin", "Ruined Cabin"],
+        "lvl": [7,8,9,11,13,15], 
+        "rooms": [5,6],
+        "monsters": ["zombie", "ghoul", "crawler", "fallen", "fallen_shaman"],
+        "unique": false,
+        "unique_monster": false
+    },
+    "cathedral": {
+        "name": ["Dark Cathedral"], 
+        "lvl": [8,11], 
+        "rooms": [27,32],
+        "monsters": ["skeleton", "skeleton_archer", "zombie", "zombie_torso", "fallen_shaman", "fallen", "crawler"],
+        "unique": true,
+        "last_chamber": "the Desecrated Nef",
+        "unique_monster": {
+            "name": "Lazarus", 
+            "weakness": "",
+            "taunt": {
+                "Paladin": ["The end is nigh for you Paladin"],
+                "Wizard": ["The end is nigh for you Wizard"],
+                "Archer": ["The end is nigh for you Archer"]
+            },
+            "type": "Demon",
+            "lvl": 8, 
+            "strength": 0.9,
+            "death": {
+                "Wizard": "",
+                "Archer": "",
+                "Paladin": ""
+            },
+            "loot": null
+        }
+    },
+    "church": {
+        "name": ["Church", "Desecrated Church", "Ruined Church"],
+        "lvl": [11,11], 
+        "rooms": [10,12],
+        "monsters": ["skeleton", "skeleton_archer", "zombie", "zombie_torso", "fallen_shaman", "fallen", "crawler"],
+        "unique": false,
+        "unique_monster": false
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "Minor Health Potion": 10,
+    "Lesser Health Potion": 50,
+    "Health Potion": 250,
+    "Greater Health Potion": 750,
+    "Major Health Potion": 2000,
+    "Super Health Potion": 5000,
+    "Heroic Health Potion": 17500,
+    "Resplendent Health Potion": 50000,
+    "Runic Health Potion": 200000,
+    "Mythic Health Potion": 1000000
+}
