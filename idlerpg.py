@@ -65,7 +65,6 @@ class IdleRPG(QMainWindow):
         icon_reset = QIcon('{}/assets/reset.png'.format(PATH))
         icon_about = QIcon('{}/assets/about.png'.format(PATH))
 
-
         action_exit = QAction(icon_exit, '&Exit', self)
         action_exit.setShortcut('Ctrl+Q')
         action_exit.setStatusTip('Leave the Game')
@@ -112,11 +111,11 @@ class IdleRPG(QMainWindow):
 
         self.stack = QStackedWidget(self)
         
-        hero_selection = HeroSelection(self)
-        self.stack.addWidget(hero_selection)
+        self.hero_selection = HeroSelection(self)
+        self.stack.addWidget(self.hero_selection)
         self.setCentralWidget(self.stack)
 
-        hero_selection.btn_create.pressed.connect(lambda:self.startGame(hero_selection))
+        self.hero_selection.btn_create.pressed.connect(lambda:self.startGame(self.hero_selection))
 
     def loadGame(self):
         log.debug("Interface :: Opening load save dialog")
@@ -172,7 +171,21 @@ class IdleRPG(QMainWindow):
         self.createGameInterface()
 
     def newGame(self):
-        pass
+
+        # Remove everything
+        self.game = Game()
+        self.docks['stats'].hide()
+        self.docks['gear'].hide()
+        self.docks['ennemy'].hide()
+        self.docks['game_stats'].hide()
+
+        self.stack = QStackedWidget(self)
+
+        self.hero_selection = HeroSelection(self)
+        self.stack.addWidget(self.hero_selection)
+        self.setCentralWidget(self.stack)
+
+        self.hero_selection.btn_create.pressed.connect(lambda:self.startGame(self.hero_selection))
 
     def aboutGame(self):
         pass
