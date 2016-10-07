@@ -405,12 +405,12 @@ class Hero(object):
             if oskill_list[skill]['type'] in weakness:
                 log.info("Hero: Skill {} has increased damage due to creature weakness".format(skill))
                 log.debug("Hero :: skill has {0} type, Creature is weak to {1}".format(oskill_list[skill]['type'], weakness))
-                skill_damage += skill_damage * 0.15
+                skill_damage += skill_damage * 0.1
 
             if oskill_list[skill]['type'] in resistance:
                 log.info("Hero: Skill {} has decreased damage due to creature resistance".format(skill))
                 log.debug("Hero :: skill has {0} type, Creature resists to {1}".format(oskill_list[skill]['type'], weakness))
-                skill_damage -= skill_damage * 0.15
+                skill_damage -= skill_damage * 0.1
 
             log.debug("Hero :: {0} will cause at least {1} damage".format(skill, skill_damage))
 
