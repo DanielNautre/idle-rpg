@@ -60,7 +60,10 @@ class IdleRPG(QMainWindow):
         
         icon_exit = QIcon('{}/assets/exit.png'.format(PATH))
         icon_load = QIcon('{}/assets/load.png'.format(PATH))
+        icon_save = QIcon('{}/assets/save.png'.format(PATH))
+        icon_new = QIcon('{}/assets/new.png'.format(PATH))
         icon_reset = QIcon('{}/assets/reset.png'.format(PATH))
+        icon_about = QIcon('{}/assets/about.png'.format(PATH))
 
 
         action_exit = QAction(icon_exit, '&Exit', self)
@@ -69,9 +72,24 @@ class IdleRPG(QMainWindow):
         action_exit.triggered.connect(qApp.quit)
 
         action_load = QAction(icon_load, '&Load', self)
-        action_load.setShortcut('Ctrl+l')
+        action_load.setShortcut('Ctrl+L')
         action_load.setStatusTip('Load a save')
         action_load.triggered.connect(self.loadGame)
+
+        action_save = QAction(icon_save, '&Save', self)
+        action_save.setShortcut('Ctrl+S')
+        action_save.setStatusTip('Save the Game')
+        action_save.triggered.connect(self.saveGame) 
+
+        action_new = QAction(icon_new, '&Create Hero', self)
+        action_new.setShortcut('Ctrl+N')
+        action_new.setStatusTip('Create a new Hero (don\'t forget to save before)')
+        action_new.triggered.connect(self.newGame) 
+
+        action_about = QAction(icon_about, '&About', self)
+        action_about.setShortcut('Ctrl+?')
+        action_about.setStatusTip('About the Idle RPG')
+        action_about.triggered.connect(self.aboutGame) 
 
         action_reset = QAction(icon_reset, '&Reset Docks', self)
         action_reset.setShortcut('Ctrl+R')
@@ -81,8 +99,13 @@ class IdleRPG(QMainWindow):
         # Create the Status Bar
         menubar = self.menuBar()
         menu_file = menubar.addMenu('&File')
-        menu_file.addAction(action_exit)
+        menu_file.addAction(action_save)
         menu_file.addAction(action_load)
+        menu_file.addAction(action_new)
+        menu_file.addSeparator()
+        menu_file.addAction(action_about)
+        menu_file.addSeparator()
+        menu_file.addAction(action_exit)
         menu_view = menubar.addMenu('&View')
         menu_view.addAction(action_reset)
         #menu_about = menubar.addMenu('&About')
@@ -147,6 +170,12 @@ class IdleRPG(QMainWindow):
         self.game.hero = self.hero
 
         self.createGameInterface()
+
+    def newGame(self):
+        pass
+
+    def aboutGame(self):
+        pass
 
     def createGameInterface(self):
         # switch the interface to the adventure one
