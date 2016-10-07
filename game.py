@@ -540,7 +540,7 @@ class Game(object):
             if 'Burning' in self.ennemy['effects']:
                 log.info("Combat :: Ennemy is burning and looses health")
                 modifier = 2 if 'Fire' in self.ennemy['weakness'] else 1
-                lost = self.ennemy['hitpoints'] * 0.1 * modifier
+                lost = round(self.ennemy['hitpoints'] * 0.1 * modifier, 1)
                 self.ennemy['hitpoints'] -= lost
                 if self.ennemy['hitpoints'] <= 0:
                     message = s['burning_kill'].format(creature=self.ennemy['name'], lost=lost)
@@ -553,7 +553,7 @@ class Game(object):
             if 'Poison' in self.ennemy['effects']:
                 log.info("Combat :: Ennemy is poisoned and looses health")
                 modifier = 2 if 'Poison' in self.ennemy['weakness'] else 1
-                lost = self.ennemy['lvl'] * 0.1 * modifier
+                lost = round(self.ennemy['lvl'] * 0.1 * modifier, 1)
                 self.ennemy['hitpoints'] -= lost
                 if self.ennemy['hitpoints'] <= 0:
                     message = s['poison_kill'].format(creature=self.ennemy['name'], lost=lost)
@@ -758,7 +758,7 @@ class Game(object):
                     # Taunt the Hero upon spawn
                     taunt = choice(self.ennemy['taunt'])
                     taunt = taunt.format(name=self.hero.name)
-                    message = "<b>{0}<b/> <i>{1}</i>".format(self.ennemy['name'], taunt)
+                    message = "<b>{0}</b> <i>{1}</i>".format(self.ennemy['name'], taunt)
                     channel.addStory(message) 
 
             else:
