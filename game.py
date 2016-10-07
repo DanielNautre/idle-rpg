@@ -479,7 +479,7 @@ class Game(object):
                     if dice >= 19:
                         taunt = choice(self.ennemy['taunt'])
                         taunt = taunt.format(name=self.hero.name)
-                        message = "<b>{0}<b/> <i>{1}</i>".format(self.ennemy['name'], taunt)
+                        message = "<b>{0}</b> <i>{1}</i>".format(self.ennemy['name'], taunt)
                         channel.addStory(message) 
         # Creature's turn
         elif self.wait == 1:
