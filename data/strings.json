@@ -63,5 +63,7 @@
     "stunned": "{creature} is stunned and cannot attack {hero}",
     "burning": "{creature} was set on fire",
     "weakened": "{creature} was weakened by {hero}'s spell",
-    "poisonded": "{creature} was poisonned"
+    "poisonded": "{creature} was poisonned",
+    "about_dialog": "Idle RPG is a game that plays itself. Ideal for people who have no time to spend playing games but stil want to enjoy the satisfaction of progressing in one. It is based on a similar concept which I remember having played years ago but couldn't find anymore.", 
+    "about_title": "About Idle RPG"
 }

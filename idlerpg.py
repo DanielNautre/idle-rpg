@@ -19,27 +19,12 @@ from widgets import HeroSelection, Adventure, HeroStats, EnnemyStats, NoEnnemySt
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QToolTip, QPushButton, 
     QWidget, QStackedWidget, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, 
     QFormLayout, QDockWidget, QListWidget, QListWidgetItem, QAction, qApp, 
-    QButtonGroup, QProgressBar, QSpacerItem, QStatusBar, QFileDialog)
+    QButtonGroup, QProgressBar, QSpacerItem, QStatusBar, QFileDialog, QMessageBox)
 from PyQt5.QtCore import QTimer, Qt, QDir
 from PyQt5.QtGui import QFont, QIcon
 
 # Import config & data
 from data import s
-
-
-def save(game, hero):
-    game_data = game.save()
-    hero_data = hero.save()
-
-    data = {}
-
-    data['game'] = game_data
-    data['hero'] = hero_data
-
-    fileObject = open('{0}/saves/{1}.sav'.format(PATH, hero.name),'wb')
-    success = pickle.dump(data, fileObject, pickle.HIGHEST_PROTOCOL)
-    fileObject.close()
-    return success
 
 
 class IdleRPG(QMainWindow):
@@ -142,6 +127,11 @@ class IdleRPG(QMainWindow):
         self.createGameInterface()
 
     def saveGame(self):
+
+        if not self.game.started:
+            log.info("Interface :: tried to save a game that wasn't started")
+            return False
+
         game_data = self.game.save()
         hero_data = self.hero.save()
 
@@ -188,7 +178,7 @@ class IdleRPG(QMainWindow):
         self.hero_selection.btn_create.pressed.connect(lambda:self.startGame(self.hero_selection))
 
     def aboutGame(self):
-        pass
+        QMessageBox.about(self, s['about_title'], s['about_dialog'])
 
     def createGameInterface(self):
         # switch the interface to the adventure one
@@ -225,7 +215,8 @@ class IdleRPG(QMainWindow):
 
     def resetDocks(self):
         if not self.game.started:
-            return
+            log.info("Interface :: tried to reset docks before a game was started")
+            return False
 
         # show
         self.docks['gear'].show()
