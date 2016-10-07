@@ -9,6 +9,11 @@ What you often see labelled Idle games, aren't really idle games because they re
 
 Idle RPG is really an idle game because once, the game starts, you have no way of influencing it. The game plays itself.
 
+## Gameplay
+
+None
+
+
 ## Hero
 
 ### Attributes
@@ -62,6 +67,12 @@ The Archer start with high dexterity and a bonus to evasion
 It is the only class who can use bows and crossbows which may provide a bonus to evasion
 it has an armor effectiveness of 70%
 
+### Death
+
+Your Hero is not immortal, and he might fight an ennemy that is too strong for him. In which case, you have two options:
+
+* Reload the latest save: with some luck, your Hero might survive this time
+* Start a new character
 
 Debuffs
 
