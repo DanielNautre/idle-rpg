@@ -19,7 +19,7 @@ from config import job_stats
 
 class Hero(object):
 
-    def __init__(self, job, gender, name):
+    def __init__(self, job='Wizard', gender='male', name='Gandalf'):
         super(Hero, self).__init__()
 
         # initiate base value of the player
@@ -71,6 +71,55 @@ class Hero(object):
         # Set health to max and mana to default value
         self.health = self.health_max
         self.mana = self.mana_max if self.job == 'Wizard' else 0
+
+    def save(self):
+        data = {}
+        data['name'] = self.name
+        data['lvl'] = self.lvl
+        data['xp'] = self.xp
+        data['next_lvl'] = self.next_lvl
+        data['job'] = self.job
+        data['gold'] = self.gold
+        data['sell_value'] = self.sell_value
+        data['hpotion_belt'] = self.hpotion_belt
+        data['mpotion_belt'] = self.mpotion_belt
+        data['offensive_skills'] = self.offensive_skills
+        data['base_intelligence'] = self.base_intelligence
+        data['base_strength'] = self.base_strength
+        data['base_dexterity'] = self.base_dexterity
+        data['base_vitality'] = self.base_vitality
+        data['armor_eff'] = self.armor_eff
+        data['main'] = self.main
+        data['gear'] = self.gear
+        data['healing_modifier'] = self.healing_modifier
+        data['mana_modifier'] = self.mana_modifier
+        data['base_blocking'] = self.base_blocking
+        data['health'] = self.health
+        data['mana'] = self.mana
+
+    def load(self, data):
+        self.name = data['name']
+        self.lvl = data['lvl']
+        self.xp = data['xp']
+        self.next_lvl = data['next_lvl']
+        self.job = data['job']
+        self.gold = data['gold']
+        self.sell_value = data['sell_value']
+        self.hpotion_belt = data['hpotion_belt']
+        self.mpotion_belt = data['mpotion_belt']
+        self.offensive_skills = data['offensive_skills']
+        self.base_intelligence = data['base_intelligence']
+        self.base_strength = data['base_strength']
+        self.base_dexterity = data['base_dexterity']
+        self.base_vitality = data['base_vitality']
+        self.armor_eff = data['armor_eff']
+        self.main = data['main']
+        self.gear = data['gear']
+        self.healing_modifier = data['healing_modifier']
+        self.mana_modifier = data['mana_modifier']
+        self.base_blocking = data['base_blocking']
+        self.health = data['health']
+        self.mana = data['mana']    
 
     def deriveSecondaryStats(self):
         self.next_lvl = self.nextLvl()

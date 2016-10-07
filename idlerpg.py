@@ -19,8 +19,8 @@ from widgets import HeroSelection, Adventure, HeroStats, EnnemyStats, NoEnnemySt
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QToolTip, QPushButton, 
     QWidget, QStackedWidget, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, 
     QFormLayout, QDockWidget, QListWidget, QListWidgetItem, QAction, qApp, 
-    QButtonGroup, QProgressBar, QSpacerItem, QStatusBar)
-from PyQt5.QtCore import QTimer, Qt
+    QButtonGroup, QProgressBar, QSpacerItem, QStatusBar, QFileDialog)
+from PyQt5.QtCore import QTimer, Qt, QDir
 from PyQt5.QtGui import QFont, QIcon
 
 # Import config & data
@@ -28,56 +28,10 @@ from data import s
 
 
 def save(game, hero):
-    game_data = {}
-    hero_data = {}
+    game_data = game.save()
+    hero_data = hero.save()
 
     data = {}
-
-    # Stats
-    game_data['kills'] = game.kills
-    game_data['damage_dealt'] = game.damage_dealt
-    game_data['damage_taken'] = game.damage_taken
-    game_data['hpotion_taken'] = game.hpotion_taken
-    game_data['mpotion_taken'] = game.mpotion_taken
-    game_data['spell_cast'] = game.spell_cast
-    game_data['dungeon_cleared'] = game.dungeon_cleared
-    game_data['unique_kills'] = game.unique_kills
-    game_data['xp_earned'] = game.xp_earned
-    game_data['gold_earned'] = game.gold_earned
-    game_data['chest_opened'] = game.chest_opened
-    game_data['item_found'] = game.item_found
-    game_data['killed_champ'] = game.killed_champ
-    game_data['finished_dungeon'] = game.finished_dungeon
-    game_data['skill_usage'] = game.skill_usage
-
-    # Hero values
-    hero_data['name'] = hero.name
-    hero_data['lvl'] = hero.lvl
-    hero_data['xp'] = hero.xp
-    hero_data['next_lvl'] = hero.next_lvl
-    hero_data['job'] = hero.job
-    hero_data['gold'] = hero.gold
-    hero_data['sell_value'] = hero.sell_value
-    hero_data['hpotion_belt'] = hero.hpotion_belt
-    hero_data['mpotion_belt'] = hero.mpotion_belt
-    hero_data['offensive_skills'] = hero.offensive_skills
-    hero_data['base_intelligence'] = hero.base_intelligence
-    hero_data['base_strength'] = hero.base_strength
-    hero_data['base_dexterity'] = hero.base_dexterity
-    hero_data['base_vitality'] = hero.base_vitality
-    hero_data['armor_eff'] = hero.armor_eff
-    hero_data['main'] = hero.main
-    hero_data['gear'] = hero.gear
-    hero_data['healing_modifier'] = hero.healing_modifier
-    hero_data['mana_modifier'] = hero.mana_modifier
-    hero_data['base_blocking'] = hero.base_blocking
-    hero_data['health'] = hero.health
-    hero_data['mana'] = hero.mana
-
-    # Game values
-    game_data['location'] = game.location
-    game_data['dungeon'] = game.dungeon
-    game_data['ennemy'] = game.ennemy
 
     data['game'] = game_data
     data['hero'] = hero_data
@@ -87,8 +41,6 @@ def save(game, hero):
     fileObject.close()
     return success
 
-def load():
-    pass
 
 class IdleRPG(QMainWindow):
     def __init__(self, game):
@@ -106,12 +58,22 @@ class IdleRPG(QMainWindow):
 
         # Create actions
         
-        action_exit = QAction(QIcon('exit.png'), '&Exit', self)
+        icon_exit = QIcon('{}/assets/exit.png'.format(PATH))
+        icon_load = QIcon('{}/assets/load.png'.format(PATH))
+        icon_reset = QIcon('{}/assets/reset.png'.format(PATH))
+
+
+        action_exit = QAction(icon_exit, '&Exit', self)
         action_exit.setShortcut('Ctrl+Q')
         action_exit.setStatusTip('Leave the Game')
         action_exit.triggered.connect(qApp.quit)
 
-        action_reset = QAction(QIcon('exit.png'), '&Reset Docks', self)
+        action_load = QAction(icon_load, '&Load', self)
+        action_load.setShortcut('Ctrl+l')
+        action_load.setStatusTip('Load a save')
+        action_load.triggered.connect(self.loadGame)
+
+        action_reset = QAction(icon_reset, '&Reset Docks', self)
         action_reset.setShortcut('Ctrl+R')
         action_reset.setStatusTip('Reset Docks to their initial position')
         action_reset.triggered.connect(self.resetDocks) 
@@ -120,6 +82,7 @@ class IdleRPG(QMainWindow):
         menubar = self.menuBar()
         menu_file = menubar.addMenu('&File')
         menu_file.addAction(action_exit)
+        menu_file.addAction(action_load)
         menu_view = menubar.addMenu('&View')
         menu_view.addAction(action_reset)
         #menu_about = menubar.addMenu('&About')
@@ -131,6 +94,44 @@ class IdleRPG(QMainWindow):
         self.setCentralWidget(self.stack)
 
         hero_selection.btn_create.pressed.connect(lambda:self.startGame(hero_selection))
+
+    def loadGame(self):
+        log.debug("Interface :: Opening load save dialog")
+        filename = QFileDialog.getOpenFileName(self, 'Load save', 
+                '{}/saves/'.format(PATH), 'Save files (*.sav)')
+        if not filename:
+            log.debug('Interface :: loading cancelled')
+            return False
+
+        log.info("Save :: Loading {}".format(filename))
+        file = open(filename[0], 'rb')
+        data = pickle.load(file)
+        log.debug("Save :: Loading profile ::\n{}".format(data))
+
+        self.hero = Hero()
+        self.hero.load(data['hero'])
+        self.game.load(data['game'])
+        self.game.started = True
+        self.game.hero = self.hero
+
+        # recalculate hero's stats
+        self.hero.recalculate()
+
+        self.createGameInterface()
+
+    def saveGame(self):
+        game_data = self.game.save()
+        hero_data = self.hero.save()
+
+        data = {}
+
+        data['game'] = game_data
+        data['hero'] = hero_data
+
+        fileObject = open('{0}/saves/{1}.sav'.format(PATH, self.hero.name),'wb')
+        success = pickle.dump(data, fileObject, pickle.HIGHEST_PROTOCOL)
+        fileObject.close()
+        return success
 
     def startGame(self, hero_val):
         hero_val.name = hero_val.edit_name.text()
@@ -145,6 +146,9 @@ class IdleRPG(QMainWindow):
         self.game.started = True
         self.game.hero = self.hero
 
+        self.createGameInterface()
+
+    def createGameInterface(self):
         # switch the interface to the adventure one
         self.adventure = Adventure(self)
         self.stack.addWidget(self.adventure)
@@ -283,8 +287,8 @@ class IdleRPG(QMainWindow):
         self.statusBar.showMessage("Time passed: {0}s".format(self.ticks * 2))
         self.ticks += 1
 
-        if self.ticks % 30 == 0:
-            if save(self.game, self.hero):
+        if self.ticks % 40 == 0:
+            if self.saveGame():
                 self.statusBar.showMessage("Game Saved")
 
 

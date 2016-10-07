@@ -65,6 +65,51 @@ class Game(object):
         self.finished_dungeon = []
         self.skill_usage = {}
 
+    def save(self):
+        data = {}
+        data['kills'] = self.kills
+        data['damage_dealt'] = self.damage_dealt
+        data['damage_taken'] = self.damage_taken
+        data['hpotion_taken'] = self.hpotion_taken
+        data['mpotion_taken'] = self.mpotion_taken
+        data['spell_cast'] = self.spell_cast
+        data['dungeon_cleared'] = self.dungeon_cleared
+        data['unique_kills'] = self.unique_kills
+        data['xp_earned'] = self.xp_earned
+        data['gold_earned'] = self.gold_earned
+        data['chest_opened'] = self.chest_opened
+        data['item_found'] = self.item_found
+        data['killed_champ'] = self.killed_champ
+        data['finished_dungeon'] = self.finished_dungeon
+        data['skill_usage'] = self.skill_usage
+
+        # Game values
+        data['location'] = self.location
+        data['dungeon'] = self.dungeon
+        data['ennemy'] = self.ennemy
+
+    def load(self, data):
+        self.kills = data['kills']
+        self.damage_dealt = data['damage_dealt']
+        self.damage_taken = data['damage_taken']
+        self.hpotion_taken = data['hpotion_taken']
+        self.mpotion_taken = data['mpotion_taken']
+        self.spell_cast = data['spell_cast']
+        self.dungeon_cleared = data['dungeon_cleared']
+        self.unique_kills = data['unique_kills']
+        self.xp_earned = data['xp_earned']
+        self.gold_earned = data['gold_earned']
+        self.chest_opened = data['chest_opened']
+        self.item_found = data['item_found']
+        self.killed_champ = data['killed_champ']
+        self.finished_dungeon = data['finished_dungeon']
+        self.skill_usage = data['skill_usage']
+
+        # Game values
+        self.location = data['location']
+        self.dungeon = data['dungeon']
+        self.ennemy = data['ennemy']
+
     def generateEnnemy(self, lvl, unique=False, boss=False, monster_list=False):
         # Reset ennemy and common var used
         self.ennemy = dict(empty_ennemy)
