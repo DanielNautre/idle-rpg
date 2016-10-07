@@ -13,12 +13,8 @@ from idlerpg import IdleRPG
 from logger import log, story
 
 # Import Graphic Lib
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QToolTip, QPushButton, 
-    QWidget, QStackedWidget, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, 
-    QFormLayout, QDockWidget, QListWidget, QListWidgetItem, QAction, qApp, 
-    QButtonGroup, QProgressBar, QSpacerItem)
-from PyQt5.QtCore import QTimer, Qt
-from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QTimer
 
 def main():
     # instatiate the game object
