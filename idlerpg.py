@@ -103,6 +103,7 @@ class IdleRPG(QMainWindow):
         self.hero_selection.btn_create.pressed.connect(lambda:self.startGame(self.hero_selection))
 
     def loadGame(self):
+
         log.debug("Interface :: Opening load save dialog")
         filename = QFileDialog.getOpenFileName(self, 'Load save', 
                 '{}/saves/'.format(PATH), 'Save files (*.sav)')
@@ -114,6 +115,15 @@ class IdleRPG(QMainWindow):
         file = open(filename[0], 'rb')
         data = pickle.load(file)
         log.debug("Save :: Loading profile ::\n{}".format(data))
+
+        # Remove docks
+        if hasattr(self, 'docks'):
+            self.docks['stats'].hide()
+            self.docks['gear'].hide()
+            self.docks['ennemy'].hide()
+            self.docks['game_stats'].hide()
+        
+        self.game = Game()
 
         self.hero = Hero()
         self.hero.load(data['hero'])
@@ -161,15 +171,14 @@ class IdleRPG(QMainWindow):
         self.createGameInterface()
 
     def newGame(self):
+        if not self.game.started:
+            log.info("Interface :: tried to create new game on create new game screen")
+            return False
 
         # Remove everything
-        self.game = Game()
-        self.docks['stats'].hide()
-        self.docks['gear'].hide()
-        self.docks['ennemy'].hide()
-        self.docks['game_stats'].hide()
+        self.clearGameInterface()
 
-        self.stack = QStackedWidget(self)
+        self.game = Game()
 
         self.hero_selection = HeroSelection(self)
         self.stack.addWidget(self.hero_selection)
@@ -179,6 +188,16 @@ class IdleRPG(QMainWindow):
 
     def aboutGame(self):
         QMessageBox.about(self, s['about_title'], s['about_dialog'])
+
+    def clearGameInterface(self):
+        # Remove everything
+        if hasattr(self, 'docks'):
+            self.docks['stats'].hide()
+            self.docks['gear'].hide()
+            self.docks['ennemy'].hide()
+            self.docks['game_stats'].hide()
+
+        self.stack = QStackedWidget(self)
 
     def createGameInterface(self):
         # switch the interface to the adventure one
@@ -270,8 +289,13 @@ class IdleRPG(QMainWindow):
             success = self.hero.heal('potion')
             if not success:
                 if self.game.inCombat():
-                    message = s['hurt'].format(hero=self.hero.name)
-                    self.adventure.addStory(message)
+                    spell_success = self.hero.heal('spell')
+                    if spell_success:
+                        message = s['heal_spell'].format(hero=self.hero.name)
+                        self.adventure.addStory(message)
+                    else:
+                        message = s['hurt'].format(hero=self.hero.name)
+                        self.adventure.addStory(message)
                 else:
                     self.game.returnToTown()
             else:

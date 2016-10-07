@@ -13,7 +13,6 @@ Idle RPG is really an idle game because once, the game starts, you have no way o
 
 None
 
-
 ## Hero
 
 ### Attributes
@@ -83,3 +82,12 @@ Stunned     -> caused by ice spells/weapons
 Weakness    -> caused by electric spells/weapons
 Poisonned   -> caused by poison spells/weapons
 
+Damage type (for spell and weapons) matching with weakness
+
+Fire
+Ice
+Electric
+Poison
+Arcane
+Sacred
+Physical

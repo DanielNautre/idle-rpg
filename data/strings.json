@@ -34,6 +34,7 @@
     "leave_home": "{hero} begins {his} long journey to fight the forces of evil", 
     "healer": "{hero} visits the Elizabeth the Healer who heals {him}",  
     "healer_mana": "The town's enchanter restores {hero}'s mana",
+    "heal_spell" : "{hero} healed himself using his magic abilities",
     "resume": "{hero} resume {his} journey to defeat evil",
     "discover_dungeon": "{hero} discovers a dungeon and ventures into the {dungeon}",
     "cleared_dungeon": "{hero} cleared {dungeon} and returns to the {fields}",
@@ -61,9 +62,13 @@
     "found_potion": "{hero} found a {potion}",
     "found_potion_no_space":"{hero} found a {potion} but has no room to carry it",
     "stunned": "{creature} is stunned and cannot attack {hero}",
-    "burning": "{creature} was set on fire",
-    "weakened": "{creature} was weakened by {hero}'s spell",
-    "poisonded": "{creature} was poisonned",
+    "weakened": "{creature} was weakened and looses {lost} strength",
+    "burning": "{creature} looses {lost} due to fire",
+    "poison": "{creature} looses {lost} due to poison",
+    "burning_kill": "{creature} was consummed by the flammes",
+    "poison_kill": "{creature} died of poisoning",
     "about_dialog": "Idle RPG is a game that plays itself. Ideal for people who have no time to spend playing games but stil want to enjoy the satisfaction of progressing in one. It is based on a similar concept which I remember having played years ago but couldn't find anymore.", 
-    "about_title": "About Idle RPG"
+    "about_title": "About Idle RPG",
+    "bizzare_potion": "{hero} found a bizzare potion <i>That looks dangerous, I'd better not drink that</i>",
+    "att_potion": "{hero} found a potion of {type} and drinks it, gaining permanently +{value} {attribut}"
 }

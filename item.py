@@ -113,7 +113,7 @@ class Item(object):
     def rollEnchant(self, nb, job):
         log.debug("Item ::  max enchants: {}".format(nb))
         self.enchanted = True
-        possible_enchants = deque(['mana', 'life', 'life_regen', 'mana_regen', 'damage', 'armor', 'gold'])
+        possible_enchants = deque(['mana', 'life', 'life_regen', 'mana_regen', 'damage', 'armor', 'gold', 'debuff'])
 
         # roll dice to determine enchants (1% for all, 20% for vit, the rest for main attribut)
         dice = d100()
@@ -141,9 +141,11 @@ class Item(object):
         elif self.type == 'armor':
             possible_enchants.remove('damage')
             possible_enchants.remove('gold')
+            possible_enchants.remove('debuff')
         elif self.type == 'jewelry':
             possible_enchants.remove('armor')
             possible_enchants.remove('damage')
+            possible_enchants.remove('debuff')
 
         log.debug("Item :: Possible enchants: {}".format(possible_enchants))
 
@@ -204,7 +206,7 @@ class Item(object):
             value = int(self.lvl * (d6()/6) / 10)
             self.enchant[type] = round(max(value, 0.1), 1)
         elif type == 'damage':
-            value = int(self.lvl * (d6()/6))
+            value = int(self.lvl * (d6()/6) / 10)
             self.enchant[type] = round(max(value, 1), 1)
         elif type == 'armor':
             value = int(self.lvl * (d6()/6) / 10)
@@ -212,6 +214,9 @@ class Item(object):
         elif type == 'gold':
             value = int(self.lvl * (d6()/6))
             self.enchant[type] = round(max(value, 1), 1)
+        elif type == 'debuff':
+            value = choice(['Ice','Electric','Fire','Poison', 'Arcane', 'Sacred'])
+            self.enchant[type] = value
         return self.enchant[type]
 
     def value(self):

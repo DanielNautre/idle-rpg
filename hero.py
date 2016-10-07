@@ -97,6 +97,8 @@ class Hero(object):
         data['health'] = self.health
         data['mana'] = self.mana
 
+        return data
+
     def load(self, data):
         self.name = data['name']
         self.lvl = data['lvl']
@@ -253,8 +255,6 @@ class Hero(object):
                             self.life_regen += value
                         if key == 'armor':
                             self.armor += value
-                        if key == 'gold':
-                            self.gold_bonus += value
 
         for id, stuff in iter(self.gear['jewel'].items()):
             if stuff:
@@ -286,11 +286,6 @@ class Hero(object):
                         self.mana_regen += value
                     if key == 'life_regen': 
                         self.life_regen += value
-                    if key == 'damage': 
-                        self.damage_min += value
-                        self.damage_max += value
-                    if key == 'gold':
-                        self.gold_bonus += value
 
     def addMpotion(self, nb_potion, potion_type):
         for _ in range(nb_potion):
@@ -350,22 +345,49 @@ class Hero(object):
 
                 return 'added'
 
-    def bestSkill(self, damage, weakness):
+    def bestSkill(self, damage, weakness, resistance):
         # calculate most effective skill to use to kill an opponent
         # default is weapon, always available
         default_skill = 'weapon'
         # first, weapon hit. Assume min damage, 
         # if we can kill it in one hit, go for it
         
-        # take ennemy weakness into account
-        weapon_damage = self.damage_min if 'Physical' in weakness else self.damage_min * 1.25
-        
+        weapon_damage = self.damage_min
+
+        # Take ennemy weakness nad weapon debuff into account
+        if self.gear['weapon']:
+            if self.gear['weapon'].enchanted:
+                if 'damage' in self.gear['weapon'].enchant:
+                    weapon_damage += self.gear['weapon'].enchant['damage']
+                if 'debuff' in self.gear['weapon'].enchant:
+                    if self.gear['weapon'].enchant['debuff'] in weakness:
+                        # if weapon debuff matches weakness: +20% damage
+                        weapon_damage += weapon_damage * 0.2
+                        log.debug("Hero :: +10% damage because weapon has {} enchant which matches ennemy weakness".format(self.gear['weapon'].enchant['debuff']))
+                    elif self.gear['weapon'].enchant['debuff'] in resistance:
+                        # if weapon debuff matches resistance: -10% damage
+                        weapon_damage -= weapon_damage * 0.1
+                        log.debug("Hero :: -10% damage because weapon has {} enchant which matches ennemy resistance".format(self.gear['weapon'].enchant['debuff']))
+                    else:
+                        # weapon debuff causes +10% special damage in any case
+                        weapon_damage += weapon_damage * 0.1
+                        log.debug("Hero :: +10% damage because weapon has {} enchant".format(self.gear['weapon'].enchant['debuff']))
+
+        if 'Physical' in weakness:
+            weapon_damage += weapon_damage * 0.1
+            log.debug("Hero :: Increased weapon damage due to ennemy weakness :: {}".format(weakness))
+        elif 'Physical' in resistance:
+            weapon_damage -= weapon_damage * 0.1
+            log.debug("Hero :: Decreased weapon damage due to ennemy resistance :: {}".format(weakness))
+
+
         if damage <= weapon_damage:
             return default_skill
 
         # test skills
         skill_over = {}
         skill_under = {}
+        skill_tactical = {}
 
         for skill in list(self.offensive_skills):
             if self.mana < self.offensive_skills[skill]['cost']:
@@ -376,11 +398,19 @@ class Hero(object):
             # calculate the min amount of damage the skill can do
             skill_damage = self.calcSkillMinDamage(skill)
 
+            if skill_damage == 0:
+                skill_tactical[skill] = oskill_list[skill]['duration']
+
             # take ennemy weakness into account
             if oskill_list[skill]['type'] in weakness:
                 log.info("Hero: Skill {} has increased damage due to creature weakness".format(skill))
                 log.debug("Hero :: skill has {0} type, Creature is weak to {1}".format(oskill_list[skill]['type'], weakness))
-                skill_damage += skill_damage * 0.25
+                skill_damage += skill_damage * 0.15
+
+            if oskill_list[skill]['type'] in resistance:
+                log.info("Hero: Skill {} has decreased damage due to creature resistance".format(skill))
+                log.debug("Hero :: skill has {0} type, Creature resists to {1}".format(oskill_list[skill]['type'], weakness))
+                skill_damage -= skill_damage * 0.15
 
             log.debug("Hero :: {0} will cause at least {1} damage".format(skill, skill_damage))
 
@@ -393,8 +423,9 @@ class Hero(object):
                 log.debug("Hero :: Mana use :: {0}: {1:.1f}".format(skill, skill_over[skill]))
 
             if overhead > 0:
-                # make a list of non-skill and how much damage they do
-                skill_under[skill] = overhead
+                # make a list of non-killing skill and how much damage they do
+                skill_under[skill] = skill_damage
+
 
         # if we overshoot the kill, let's use the less mana possible
         if len(skill_over) > 0:
@@ -405,10 +436,19 @@ class Hero(object):
         if damage <= weapon_damage * 2: 
             return default_skill
 
+        highest_damage = sorted(skill_under.items(), key=operator.itemgetter(1), reverse=True)
+
+        # if ennemy has more than 5 times the best damage we guess we will cause. try a tactical skill
+        if len(highest_damage) > 0 and len(skill_tactical) > 0:
+            sorted_skill = sorted(skill_tactical.items(), key=operator.itemgetter(1), reverse=True)
+            if damage > 5 * highest_damage[0][1]:
+                for skill in sorted_skill:
+                    if oskill_list[skill]['type'] in weakness:
+                        return skill
+
         # If that doesn't work, do maximal amount of damage with a skill
         if len(skill_under) > 0:
-            sorted_skill = sorted(skill_under.items(), key=operator.itemgetter(1))
-            return sorted_skill[0][0]
+            return highest_damage[0][0]
 
         # if no good skill found (or no mana), use the default
         return default_skill
@@ -461,7 +501,7 @@ class Hero(object):
 
         return damage
 
-    def useSkill(self, skill, weakness):
+    def useSkill(self, skill, weakness, resistance):
         if skill == 'weapon':
             dice = d20()
             log.debug("Hero :: Skill Damage Dice :: {}".format(dice))
@@ -473,21 +513,49 @@ class Hero(object):
             else:
                 damage = (self.damage_min + self.damage_max) / 2
 
+            if self.gear['weapon']:
+                if self.gear['weapon'].enchanted:
+                    if 'damage' in self.gear['weapon'].enchant:
+                        damage += self.gear['weapon'].enchant['damage']
+                    if 'debuff' in self.gear['weapon'].enchant:
+                        if self.gear['weapon'].enchant['debuff'] in weakness:
+                            # if weapon debuff matches weakness: +20% damage
+                            damage += damage * 0.2
+                            log.debug("Hero :: +10% damage because weapon has {} enchant which matches ennemy weakness".format(self.gear['weapon'].enchant['debuff']))
+                        elif self.gear['weapon'].enchant['debuff'] in resistance:
+                            # if weapon debuff matches resistance: -10% damage
+                            damage -= damage * 0.1
+                            log.debug("Hero :: -10% damage because weapon has {} enchant which matches ennemy resistance".format(self.gear['weapon'].enchant['debuff']))
+                        else:
+                            # weapon debuff causes +10% special damage in any case
+                            damage += damage * 0.1
+                            log.debug("Hero :: +10% damage because weapon has {} enchant".format(self.gear['weapon'].enchant['debuff']))
+
             if 'Physical' in weakness:
-                damage += damage * 0.25
+                damage += damage * 0.1
                 log.debug("Hero :: Increased weapon damage due to ennemy weakness :: {}".format(weakness))
+            elif 'Physical' in resistance:
+                damage -= damage * 0.1
+                log.debug("Hero :: Decreased weapon damage due to ennemy resistance :: {}".format(weakness))
+
 
             return round(damage, 1)
         else:
             if self.offensive_skills[skill]['cost'] > self.mana:
                 return 0
 
+            if oskill_list[skill]['damage'] == 0:
+                return 0
+
             damage = self.calcSkillDamage(skill)
             self.mana -= self.offensive_skills[skill]['cost']
 
-            if weakness in oskill_list[skill]['type']:
-                damage += damage * 0.25    
-                log.debug("Hero :: Increased spell damage due to ennemy weakness :: {}".format(weakness))            
+            if oskill_list[skill]['type'] in weakness:
+                damage += damage * 0.1   
+                log.debug("Hero :: Increased spell damage due to ennemy weakness :: {}".format(weakness))
+            elif oskill_list[skill]['type'] in resistance:
+                damage -= damage * 0.1   
+                log.debug("Hero :: Decreased spell damage due to ennemy resistance :: {}".format(weakness))            
 
             return round(damage, 1)
 
@@ -514,6 +582,18 @@ class Hero(object):
             return restore
         elif method == 'healer':
             self.health = self.health_max
+        elif method == 'spell':
+            if len(self.offensive_skills) == 0:
+                return False
+            for skill in self.offensive_skills:
+                if oskill_list[skill]['type'] == "Healing":
+                    if self.offensive_skills[skill]['cost'] > self.mana:
+                        return False
+                    self.health += self.health_max * 0.5
+                    self.health = max(self.health, self.health_max)
+                    self.mana -= self.offensive_skills[skill]['cost']
+                else:
+                    return False
 
         return True
 

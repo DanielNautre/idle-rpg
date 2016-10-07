@@ -410,7 +410,7 @@ class EnnemyStats(QWidget):
 
         self.lbl_lvl = QLabel(str(self.ennemy['lvl']))
         self.lbl_type = QLabel(str(self.ennemy['type']))
-        self.lbl_strength = QLabel("{0:.1f}".format(self.ennemy['strength'] * self.ennemy['lvl'] * 2))
+        self.lbl_strength = QLabel("{0:.1f}".format(self.ennemy['strength'] * 2))
         self.lbl_hitpoints = QLabel("{0:.1f}".format(self.ennemy['hitpoints']))
         string = ""
         for weakness in self.ennemy['weakness']:
@@ -442,6 +442,7 @@ class EnnemyStats(QWidget):
 
     def updateStats(self):
         self.lbl_hitpoints.setText("{0:.1f}".format(self.ennemy['hitpoints']))
+        self.lbl_hitpoints.setText("{0:.1f}".format(self.ennemy['strength'] * 2))
 
 
 class NoEnnemyStats(QWidget):
@@ -721,7 +722,26 @@ class GearStats(QWidget):
         tt += "<p>{desc}</p>".format(desc=gear.desc)
 
         if gear.enchanted:
+                if 'debuff' in gear.enchant:
+                    if gear.enchant['debuff'] == "Fire":
+                        color = 'red'
+                    elif gear.enchant['debuff'] == "Ice":
+                        color = 'blue'
+                    elif gear.enchant['debuff'] == "Electric":
+                        color = 'yellow'
+                    elif gear.enchant['debuff'] == "Poison":
+                        color = 'green'
+                    elif gear.enchant['debuff'] == "Arcane":
+                        color = 'purple'
+                    elif gear.enchant['debuff'] == "Sacred":
+                        color = 'black'
+
+
+                    debuff = verboseEnchants(gear.enchant['debuff'])
+                    tt += "<h3 align='center' style='color:{color}'>{debuff}</h3>".format(debuff=debuff, color=color)
                 for key, value in gear.enchant.items():
+                    if key == 'debuff':
+                        continue
                     tt += "<b>{0}</b>: <span style='color:green'>{1}</span><br \>".format(verboseEnchants(key), value) 
 
         tt += "<h5>level {lvl} {sub}</h5>".format(lvl=gear.lvl, sub=gear.verboseSubtype())

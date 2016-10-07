@@ -2,6 +2,7 @@
     "morgul": {
         "name": "Morgul", 
         "weakness": "",
+        "resistance": "",
         "type": "demon",
         "lvl": [8, 9], 
         "strength": 1,
@@ -29,6 +30,7 @@
     "jock": {
         "name": "Jock the Weak", 
         "weakness": "",
+        "resistance": "",
         "type": "demon",
         "lvl": [1, 2], 
         "strength": 0.1,
@@ -47,6 +49,7 @@
     "samy": {
         "name": "Samy the Fool", 
         "weakness": "",
+        "resistance": "",
         "type": "demon",
         "lvl": [1, 2], 
         "strength": 0.4,

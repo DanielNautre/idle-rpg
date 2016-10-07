@@ -2,6 +2,8 @@
     "firebolt": {
         "name": "Firebolt",
         "type": "Fire",
+        "chance" : 10,
+        "duration": 2,
         "desc": "The basic fire spell that all Wizards know.",
         "kill_string": "{creature} was burned to a crisp by {hero}'s firebolt",
         "hit_string": "{hero} hits {creature} with a firebolt inflicting <b style='color:#F5EE17'>{damage:.1f}</b> points of damage",
@@ -16,6 +18,8 @@
     "chargedbolt": {
         "name": "Charged Bolt",
         "type": "Electric",
+        "chance" : 10,
+        "duration": 2,
         "desc": "A basic electric spell, that fits most situations",
         "kill_string": "{hero} electrocuted {creature}",
         "hit_string": "{creature} was hit by {hero}'s' charged bolt dealing <b style='color:#F5EE17'>{damage:.1f}</b> points of damage",
@@ -31,6 +35,8 @@
     "fireball": {
         "name": "Fireball",
         "type": "Fire",
+        "chance" : 10,
+        "duration": 2,
         "desc": "A powerful fire ball.",
         "kill_string": "{creature} was torched by {hero}'s fireball",
         "hit_string": "{hero} hits {creature} with a fireball inflicting <b style='color:#F5EE17'>{damage:.1f}</b> points of damage",
@@ -45,6 +51,8 @@
     "flamewave": {
         "name": "Flame Wave",
         "type": "Fire",
+        "chance" : 10,
+        "duration": 2,
         "desc": "A wave of fire overwhelming your ennemies.",
         "kill_string": "{creature} was torched by {hero}'s flame wave",
         "hit_string": "{hero} hits {creature} with a wave of flames inflicting <b style='color:#F5EE17'>{damage:.1f}</b> points of damage",
@@ -59,6 +67,8 @@
     "arrowrain": {
         "name": "Rain of arrows",
         "type": "Physical",
+        "chance" : 10,
+        "duration": 0,
         "desc": "",
         "kill_string": "{creature} was ravaged by a {hero}'s rain of arrows",
         "hit_string": "{hero} hits {creature} with a rain of arrows causing <b style='color:#F5EE17'>{damage:.1f}</b> points of damage",
@@ -73,6 +83,8 @@
     "charge": {
         "name": "Charge",
         "type": "Physical",
+        "chance" : 10,
+        "duration": 0,
         "desc": "The paladin most basic skill,<br />charging forward with his shield",
         "kill_string": "{hero} hits {creature} with {his} shield, breaking his every bone",
         "hit_string": "{hero} charges {creature} causing <b style='color:#F5EE17'>{damage:.1f}</b> points of damage",
@@ -83,5 +95,21 @@
         "step_cost": 0.1,
         "min_cost": 3,
         "damage": "(({d6} / 2) * {weapon}) * (1.09**{slvl})"
+    },
+    "heal": {
+        "name": "Heal",
+        "type": "Healing",
+        "chance" : 10,
+        "duration": 0,
+        "desc": "A powerful healing spell",
+        "kill_string": "",
+        "hit_string": "",
+        "job": ["Wizard"],
+        "base_att": 15,
+        "step_att": 5,
+        "base_cost": 7,
+        "step_cost": 0.2,
+        "min_cost": 5,
+        "damage": "0"
     }
 }

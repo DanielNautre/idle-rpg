@@ -33,6 +33,7 @@
         "unique_monster": {
             "name": "Andric the Miller",
             "weakness": "",
+            "resistance": "",
             "taunt": {
                 "Paladin": ["The end is nigh for you Paladin"],
                 "Wizard": ["The end is nigh for you Wizard"],
@@ -59,6 +60,7 @@
         "unique_monster": {
             "name": "Bernard the Dead Butcher", 
             "weakness": "",
+            "resistance": "",
             "taunt": {
                 "Paladin": ["The end is nigh for you Paladin"],
                 "Wizard": ["The end is nigh for you Wizard"],
@@ -117,6 +119,7 @@
         "unique_monster": {
             "name": "The Fallen Bishop",
             "weakness": "",
+            "resistance": "",
             "taunt": {
                 "Paladin": ["The end is nigh for you Paladin"],
                 "Wizard": ["The end is nigh for you Wizard"],
@@ -159,6 +162,7 @@
         "unique_monster": {
             "name": "Lazarus", 
             "weakness": "",
+            "resistance": "",
             "taunt": {
                 "Paladin": ["The end is nigh for you Paladin"],
                 "Wizard": ["The end is nigh for you Wizard"],

@@ -2,6 +2,7 @@
     "rat": {
         "name": "Rat", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [1,3], 
         "strength": 0.2,
@@ -10,6 +11,7 @@
     "cockroach": {
         "name": "Cockroach", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [1,2], 
         "strength": 0.1,
@@ -18,6 +20,7 @@
     "small-spider": {
         "name": "Small Spider", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [1,2], 
         "strength": 0.3,
@@ -26,6 +29,7 @@
     "thief": {
         "name": "Thief", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [1,3], 
         "strength": 0.2,
@@ -34,6 +38,7 @@
     "scavenger": {
         "name": "Scavenger", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [2,4], 
         "strength": 0.4,
@@ -42,6 +47,7 @@
     "bat": {
         "name": "Bat", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [1,4], 
         "strength": 0.1,
@@ -49,7 +55,8 @@
     },     
     "zombie": {
         "name": "Zombie", 
-        "weakness": "",
+        "weakness": "Sacred",
+        "resistance": "",
         "type": "Undead",
         "lvl": [3,Infinity], 
         "strength": 0.4,
@@ -57,7 +64,8 @@
     }, 
     "zombie_torso": {
         "name": "Zombie Torso", 
-        "weakness": "",
+        "weakness": "Sacred",
+        "resistance": "",
         "type": "Undead",
         "lvl": [2,8], 
         "strength": 0.3,
@@ -65,7 +73,8 @@
     },  
     "skeleton": {
         "name": "Skeleton", 
-        "weakness": "",
+        "weakness": "Sacred",
+        "resistance": "",
         "type": "Undead",
         "lvl": [3,Infinity], 
         "strength": 0.5,
@@ -73,7 +82,8 @@
     }, 
     "skeleton_archer": {
         "name": "Skeleton Archer", 
-        "weakness": "",
+        "weakness": "Sacred",
+        "resistance": "",
         "type": "Undead",
         "lvl": [4, Infinity], 
         "strength": 0.6,
@@ -82,6 +92,7 @@
     "crawler": {
         "name": "Crawler", 
         "weakness": "",
+        "resistance": "",
         "type": "Demon",
         "lvl": [5,Infinity], 
         "strength": 0.3,
@@ -90,6 +101,7 @@
     "fallen": {
         "name": "Fallen", 
         "weakness": "",
+        "resistance": "",
         "type": "Demon",
         "lvl": [5,Infinity], 
         "strength": 0.4,
@@ -98,6 +110,7 @@
     "fallen_shaman": {
         "name": "Fallen Shaman", 
         "weakness": "",
+        "resistance": "",
         "type": "Demon",
         "lvl": [5,Infinity], 
         "strength": 0.6,
@@ -106,6 +119,7 @@
     "wolf": {
         "name": "Wolf", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [5,10], 
         "strength": 0.4,
@@ -114,6 +128,7 @@
     "bear": {
         "name": "Bear", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [6,12], 
         "strength": 0.6,
@@ -122,6 +137,7 @@
     "ghoul": {
         "name": "Ghoul", 
         "weakness": "",
+        "resistance": "",
         "type": "Undead",
         "lvl": [7,Infinity], 
         "strength": 0.5,
@@ -130,6 +146,7 @@
     "savage_houl": {
         "name": "Savage Ghoul", 
         "weakness": "",
+        "resistance": "",
         "type": "Undead",
         "lvl": [7,Infinity], 
         "strength": 0.6,
@@ -137,7 +154,8 @@
     },
     "electric_eel": {
         "name": "Electric Eel", 
-        "weakness": "",
+        "weakness": "Fire",
+        "resistance": "",
         "type": "Animal",
         "lvl": [8,15], 
         "strength": 0.2,
@@ -146,6 +164,7 @@
     "goatman": {
         "name": "Goatman", 
         "weakness": "",
+        "resistance": "",
         "type": "Animal",
         "lvl": [15,Infinity], 
         "strength": 0.5,
@@ -154,6 +173,7 @@
     "demon": {
         "name": "Demon", 
         "weakness": "",
+        "resistance": "",
         "type": "Demon",
         "lvl": [20,Infinity], 
         "strength": 0.7,
@@ -162,6 +182,7 @@
     "balrog": {
         "name": "Balrog", 
         "weakness": "",
+        "resistance": "",
         "type": "Demon",
         "lvl": [21,Infinity], 
         "strength": 0.6,
@@ -170,6 +191,7 @@
     "boneater": {
         "name": "Bone Eater", 
         "weakness": "",
+        "resistance": "",
         "type": "Demon",
         "lvl": [25,Infinity], 
         "strength": 0.5,
@@ -178,6 +200,7 @@
     "hell_knight": {
         "name": "Hellish Knight", 
         "weakness": "",
+        "resistance": "",
         "type": "Demon",
         "lvl": [35,Infinity], 
         "strength": 0.6,

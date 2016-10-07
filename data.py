@@ -50,6 +50,6 @@ weapon_list = {'sword','mace','flail','axe','staff','bow','crossbow'}
 armor_list = {'shield','pants','boots','helm','belt','chest','shoulders','bracers','gloves'}
 jewel_list = {'ring','amulet'}
 
-verbose_enchants = {'int':'Intelligence', 'str':'Strength', 'dex':'Dexterity', 'vit':'Vitality', 'all':'All Attributes', 'mana':'Mana', 'life':'Life', 'life_regen':'Life regen per tick', 'mana_regen':'Mana regen per tick', 'damage':'Bonus Damage', 'armor':'Bonus Armor', 'gold':'Bonus Gold'}
+verbose_enchants = {'int':'Intelligence', 'str':'Strength', 'dex':'Dexterity', 'vit':'Vitality', 'all':'All Attributes', 'mana':'Mana', 'life':'Life', 'life_regen':'Life regen per tick', 'mana_regen':'Mana regen per tick', 'damage':'Bonus Damage', 'armor':'Bonus Armor', 'gold':'Bonus Gold', 'Fire':'Fire', 'Ice':'Ice', 'Electric':'Electric', 'Poison':'Poison', 'Arcane':'Arcane', 'Sacred':'Sacred'}
 
 verbose_subtype = {'sword':'Sword','mace':'Mace','flail':'Flail','axe':'Axe','staff':'Staff','bow':'Bow','crossbow':'Crossbow','shield':'Shield','pants':'Pants','boots':'Boots','helm':'Helmet','belt':'Belt','chest':'Chest','shoulders':'Shoulders','bracers':'Bracers','gloves':'Gloves','ring':'Ring','amulet':'Amulet'}

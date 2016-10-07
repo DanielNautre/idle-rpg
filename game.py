@@ -88,6 +88,8 @@ class Game(object):
         data['dungeon'] = self.dungeon
         data['ennemy'] = self.ennemy
 
+        return data
+
     def load(self, data):
         self.kills = data['kills']
         self.damage_dealt = data['damage_dealt']
@@ -141,13 +143,14 @@ class Game(object):
             log.info("Monster :: Generate Boss")
             log.debug("Monster :: Boss info ::\n {}".format(boss))
             lvl = self.hero.lvl # boss['lvl']
-            strength = boss['strength']
+            strength = boss['strength'] * (lvl ** 1.12)
             modifier += 2 * strength
             hitpoints = int((lvl ** 1.3) * 7) + 15
             death_message = boss['death']
             name = boss['name']
             type = boss['type']
             weakness = boss['weakness']
+            resistance = boss['resistance']
             loot = boss['loot']
             taunt = boss['taunt'][self.hero.job]
             message = s['spawn_boss']
@@ -155,6 +158,9 @@ class Game(object):
         else:
             for key in monster_list:
                 if lvl >= monster_pool[key]['lvl'][0] and lvl <= monster_pool[key]['lvl'][1]:
+                    if key in self.killed_champ:
+                        del(champions[key])
+                        continue
                     matches.append(key)
 
             if len(matches) > 0:                   
@@ -167,11 +173,12 @@ class Game(object):
 
             if unique:
                 message = s['spawn_champ']
-                strength = champions[id]['strength']
+                strength = champions[id]['strength'] * (lvl ** 1.12)
                 hitpoints = int((lvl ** 1.4) * 5) + 5
                 name = champions[id]['name']
                 type = champions[id]['type']
                 weakness = champions[id]['weakness']
+                resistance = champions[id]['resistance']
                 # only if boss
                 loot = champions[id]['loot']
                 death_message = champions[id]['death']
@@ -180,11 +187,12 @@ class Game(object):
                 del(champions[id])
             else:        
                 message = s['spawn']
-                strength = monsters[id]['strength']
+                strength = monsters[id]['strength'] * (lvl ** 1.12)
                 hitpoints = int((lvl ** 1.4) * 2.5) + 2
                 name = monsters[id]['name']
                 type = monsters[id]['type']
                 weakness = monsters[id]['weakness']
+                resistance = monsters[id]['resistance']
                 # only if boss
                 loot = False
                 death_message = None
@@ -197,10 +205,13 @@ class Game(object):
         self.ennemy['type'] = type
         self.ennemy['strength'] = strength
         self.ennemy['weakness'] = weakness
+        self.ennemy['resistance'] = resistance
         self.ennemy['unique'] = modifier
         self.ennemy['death'] = death_message
         self.ennemy['taunt'] = taunt
         self.ennemy['effects'] = defaultdict(list)
+
+        log.debug("Combat :: ennemy stats ::\n{}".format(self.ennemy))
 
         return message
 
@@ -213,6 +224,9 @@ class Game(object):
 
         for key in list(dungeons):
             if lvl in dungeons[key]['lvl']:
+                if key in self.finished_dungeon:
+                    del(dungeons[key])
+                    continue
                 matches.append(key)
 
         if len(matches) < 1:
@@ -269,8 +283,27 @@ class Game(object):
             else:
                 item = Item(job=self.hero.job, rare=loot)
 
-
-        elif dice in range(1,5):
+        elif dice == 1:
+            if self.hero.lvl < 25:
+                message = s['bizzare_potion'].format(hero=self.hero.name)
+            else:
+                dice = d20()
+                log.debug("LootDrop :: Attribut potion dice :: {}".format(dice))
+                if dice == 1:
+                    attribut_potion = choice(['Skill','Knowledge','Vigor','Might'])
+                    potion_equivalence = {'Skill':'Dexterity','Knowledge':'Intelligence','Vigor':'Vitality','Might':'Strength'}
+                    message = s['att_potion'].format(hero=self.hero.name, value=1, type= attribut_potion, attribut=potion_equivalence[attribut_potion])
+                    if attribut_potion == 'Skill':
+                        self.hero.base_dexterity += 1
+                    elif attribut_potion == 'Knowledge':
+                        self.hero.base_intelligence += 1
+                    elif attribut_potion == 'Vigor':
+                        self.hero.base_vitality += 1
+                    elif attribut_potion == 'Might':
+                        self.hero.base_strength += 1
+                else:
+                    message = s['bizzare_potion'].format(hero=self.hero.name)
+        elif dice in range(2,5):
             # drop a skill tome                    
             skill = selectRandomSkill(self.hero.job, self.hero.baseAtt())
             log.info("LootDrop :: Found Skill Book :: {}".format(skill))
@@ -367,8 +400,8 @@ class Game(object):
         # Hero's turn
         if self.wait == 0:
             # Hero's turn
-            skill_to_use = self.hero.bestSkill(self.ennemy['hitpoints'], self.ennemy['weakness'])
-            damage = round(self.hero.useSkill(skill_to_use, self.ennemy['weakness']), 1)
+            skill_to_use = self.hero.bestSkill(self.ennemy['hitpoints'], self.ennemy['weakness'], self.ennemy['resistance'])
+            damage = round(self.hero.useSkill(skill_to_use, self.ennemy['weakness'], self.ennemy['resistance']), 1)
             log.info("Combat :: Hero hits :: {0}: {1}".format(skill_to_use, damage))
             
             # update stats
@@ -387,10 +420,11 @@ class Game(object):
                 # update stats
                 self.spell_cast += 1
 
-            self.ennemy['hitpoints'] -= damage
+            if damage > 0:
+                self.ennemy['hitpoints'] -= damage
 
-            # increment stats
-            self.damage_dealt += damage
+                # increment stats
+                self.damage_dealt += damage
 
             # Creature is killed
             if self.ennemy['hitpoints'] <= 0:
@@ -400,69 +434,44 @@ class Game(object):
                 # increment stat
                 self.kills += 1
 
-                # calculate loot and XP
-                unique = self.ennemy['unique']
-
-                # increment stats and output death message for boss/champions
-                if unique > 1:
-                    self.unique_kills += 1
-                    self.killed_champ.append(self.ennemy['name'])
-                    death_message = self.ennemy['death'][self.hero.job]
-                    if len(death_message) > 0:
-                        channel.addStory("<b>{0}</b>  <i>{1}</i>".format(self.hero.name, death_message))
-
-
-                earned_xp = int(self.ennemy['lvl'] * 100 * self.ennemy['strength'] * unique)
-                earned_gold = int(self.ennemy['lvl'] + choice([1, 2, 3]) * unique * self.hero.gold_bonus * self.ennemy['strength'])
-
-                self.hero.xp += earned_xp
-                self.hero.gold += earned_gold
-
-                # increment stat
-                self.kills += 1
-                self.xp_earned += earned_xp
-                self.gold_earned += earned_gold            
-
-                message = s['xp_earned']
-                message = message.format(hero=self.hero.name, gold=earned_gold, xp=earned_xp)
-                channel.addStory(message)
-                log.info("Combat :: {0} killed for {1} xp and {2} gold".format(self.ennemy['name'], earned_xp, earned_gold))
-
-                dice = d6()
-                log.debug("Combat :: Loot dice :: {}".format(dice))
-
-                if dice == 6:
-                    self.handleLootDrop(channel)
-
-                if self.ennemy['loot']:
-                    self.handleLootDrop(channel)
-
-
-                self.ennemy = dict(empty_ennemy)
-                # Update the dock
-                docks['ennemy'].setWidget(NoEnnemyStats())
+                self.kill(channel, docks)
 
             else:
                 message = hit_string.format(hero=self.hero.name, creature=self.ennemy['name'], damage=damage)
                 channel.addStory(message)
 
                 # If the creature survives, check if the skill created any effect
+                effect_type = None
                 if skill_to_use != 'weapon':
+                    effect_type = oskill_list[skill_to_use]['type']
+                    duration = oskill_list[skill_to_use]['duration']
+                    chance = oskill_list[skill_to_use]['chance']
+                elif self.hero.gear['weapon']:
+                    if 'debuff' in self.hero.gear['weapon'].enchant:
+                        effect_type = self.hero.gear['weapon'].enchant['debuff']
+                        duration = 10000 if effect_type == 'Electric' else 1
+                        chance = 10 
+
+                if effect_type:
                     if oskill_list[skill_to_use]['type'] == "Fire":
-                        if d100() > 90:
-                            self.ennemy['effects']['Burning'] = 1
+                        if d100() <= chance:
+                            self.ennemy['effects']['Burning'] = duration
                             log.debug("Combat :: Burning effect was applied")
                     if oskill_list[skill_to_use]['type'] == "Poison":
-                        if d100() > 90:
-                            self.ennemy['effects']['Poison'] = 2
+                        if d100() <= chance:
+                            self.ennemy['effects']['Poison'] = duration
                             log.debug("Combat :: Poison effect was applied")
                     if oskill_list[skill_to_use]['type'] == "Electric":
-                        if d100() > 90:
-                            self.ennemy['effects']['Weakness'] = 1
+                        if d100() <= chance:
+                            self.ennemy['effects']['Weakness'] = duration
                             log.debug("Combat :: Weakness effect was applied")
+                            lost = round(self.ennemy['strength'] * 0.1, 1)
+                            self.ennemy['strength'] -= lost
+                            message = s['weakened'].format(creature=self.ennemy['name'], lost=lost)
+                            channel.addStory(message)
                     if oskill_list[skill_to_use]['type'] == "Ice":
-                        if d100() > 90:
-                            self.ennemy['effects']['Stun'] = 1
+                        if d100() <= chance:
+                            self.ennemy['effects']['Stun'] = duration
                             log.debug("Combat :: Stun effect was applied")
 
                 if self.ennemy['taunt']:
@@ -502,7 +511,7 @@ class Game(object):
                     critic_msg = ' critically'
 
                 # calculate raw damage
-                raw_damage = round((self.ennemy['lvl'] ** 1.12) * self.ennemy['strength'] * critic, 1)
+                raw_damage = round(self.ennemy['strength'] * critic, 1)
                 # caculate damage, based on armor and effectiveness
                 # ensure armor absorbs maximum of 90% of raw damage. And player takes at least 0.1 damage 
                 min_damage = round(max(raw_damage / 10, 0.1), 1)
@@ -530,7 +539,31 @@ class Game(object):
             # Apply any damage effect to the creature
             if 'Burning' in self.ennemy['effects']:
                 log.info("Combat :: Ennemy is burning and looses health")
+                modifier = 2 if 'Fire' in self.ennemy['weakness'] else 1
+                lost = self.ennemy['hitpoints'] * 0.1 * modifier
+                self.ennemy['hitpoints'] -= lost
+                if self.ennemy['hitpoints'] <= 0:
+                    message = s['burning_kill'].format(creature=self.ennemy['name'], lost=lost)
+                    channel.addStory(message)
+                    self.kill(channel, docks)
+                else:
+                    message = s['burning'].format(creature=self.ennemy['name'], lost=lost)
+                    channel.addStory(message)
 
+            if 'Poison' in self.ennemy['effects']:
+                log.info("Combat :: Ennemy is poisoned and looses health")
+                modifier = 2 if 'Poison' in self.ennemy['weakness'] else 1
+                lost = self.ennemy['lvl'] * 0.1 * modifier
+                self.ennemy['hitpoints'] -= lost
+                if self.ennemy['hitpoints'] <= 0:
+                    message = s['poison_kill'].format(creature=self.ennemy['name'], lost=lost)
+                    channel.addStory(message)
+                    self.kill(channel, docks)
+                else:
+                    message = s['poison'].format(creature=self.ennemy['name'], lost=lost)
+                    channel.addStory(message)
+
+            # clear debuffs if counter reached 0
             marked = []
 
             for debuff in self.ennemy['effects']:
@@ -758,6 +791,48 @@ class Game(object):
             # we explored one room, let's tick it off
             if self.dungeon['rooms']:
                 self.dungeon['rooms'] = max(0, self.dungeon['rooms'] - 1)
+
+    def kill(self, channel, docks):
+        # calculate loot and XP
+        unique = self.ennemy['unique']
+
+        # increment stats and output death message for boss/champions
+        if self.ennemy['unique'] > 1:
+            self.unique_kills += 1
+            self.killed_champ.append(self.ennemy['name'])
+            death_message = self.ennemy['death'][self.hero.job]
+            if len(death_message) > 0:
+                channel.addStory("<b>{0}</b>  <i>{1}</i>".format(self.hero.name, death_message))
+
+        earned_xp = int(self.ennemy['lvl'] * 100 * self.ennemy['strength'] * unique)
+        earned_gold = int(self.ennemy['lvl'] + choice([1, 2, 3]) * unique * self.hero.gold_bonus * self.ennemy['strength'])
+
+        self.hero.xp += earned_xp
+        self.hero.gold += earned_gold
+
+        # increment stat
+        self.kills += 1
+        self.xp_earned += earned_xp
+        self.gold_earned += earned_gold            
+
+        message = s['xp_earned']
+        message = message.format(hero=self.hero.name, gold=earned_gold, xp=earned_xp)
+        channel.addStory(message)
+        log.info("Combat :: {0} killed for {1} xp and {2} gold".format(self.ennemy['name'], earned_xp, earned_gold))
+
+        dice = d6()
+        log.debug("Combat :: Loot dice :: {}".format(dice))
+
+        if dice == 6:
+            self.handleLootDrop(channel)
+
+        if self.ennemy['loot']:
+            self.handleLootDrop(channel)
+
+
+        self.ennemy = dict(empty_ennemy)
+        # Update the dock
+        docks['ennemy'].setWidget(NoEnnemyStats())
 
     def inCombat(self):
         if not self.ennemy['name']:
