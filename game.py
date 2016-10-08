@@ -145,7 +145,7 @@ class Game(object):
             lvl = self.hero.lvl # boss['lvl']
             strength = boss['strength'] * (lvl ** 1.12)
             modifier += 2 * strength
-            hitpoints = int((lvl ** 1.3) * 7) + 15
+            hitpoints = int((lvl ** 1.35) * 5.5) + 15
             death_message = boss['death']
             name = boss['name']
             type = boss['type']
@@ -174,7 +174,7 @@ class Game(object):
             if unique:
                 message = s['spawn_champ']
                 strength = champions[id]['strength'] * (lvl ** 1.12)
-                hitpoints = int((lvl ** 1.4) * 5) + 5
+                hitpoints = int((lvl ** 1.35) * 4) + 5
                 name = champions[id]['name']
                 type = champions[id]['type']
                 weakness = champions[id]['weakness']
@@ -188,7 +188,7 @@ class Game(object):
             else:        
                 message = s['spawn']
                 strength = monsters[id]['strength'] * (lvl ** 1.12)
-                hitpoints = int((lvl ** 1.4) * 2.5) + 2
+                hitpoints = int((lvl ** 1.35) * 2.5) + 2
                 name = monsters[id]['name']
                 type = monsters[id]['type']
                 weakness = monsters[id]['weakness']
