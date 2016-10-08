@@ -260,7 +260,7 @@ class Game(object):
                     return key
             return "Void"
         elif self.location == 'dungeon':
-            if self.dungeon['rooms'] == 1 and self.dungeon['last_chamber']:
+            if self.dungeon['rooms'] == 0 and self.dungeon['last_chamber']:
                 return "{0}: {1}".format(self.dungeon['name'], self.dungeon['last_chamber'])
             else:
                 return self.dungeon['name']
