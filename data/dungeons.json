@@ -35,13 +35,13 @@
             "weakness": "",
             "resistance": "",
             "taunt": {
-                "Paladin": ["The end is nigh for you Paladin"],
-                "Wizard": ["The end is nigh for you Wizard"],
-                "Archer": ["The end is nigh for you Archer"]
+                "Paladin": ["Roar !", "Brains !"],
+                "Wizard": ["Roar !", "Brains !"],
+                "Archer": ["Roar !", "Brains !"]
             },
             "type": "Undead",
             "lvl": 3, 
-            "strength": 0.6,            
+            "strength": 0.4,            
             "death": {
                 "Wizard": "",
                 "Archer": "",
@@ -62,13 +62,13 @@
             "weakness": "",
             "resistance": "",
             "taunt": {
-                "Paladin": ["The end is nigh for you Paladin"],
-                "Wizard": ["The end is nigh for you Wizard"],
-                "Archer": ["The end is nigh for you Archer"]
+                "Paladin": ["Roar !", "Brains !"],
+                "Wizard": ["Roar !", "Brains !"],
+                "Archer": ["Roar !", "Brains !"]
             },
             "type": "Undead",
             "lvl": 4, 
-            "strength": 0.7,
+            "strength": 0.6,
             "death": {
                 "Wizard": "",
                 "Archer": "",
@@ -127,7 +127,7 @@
             },
             "type": "Undead",
             "lvl": 5, 
-            "strength": 0.8,
+            "strength": 0.6,
             "death": {
                 "Wizard": "",
                 "Archer": "",
@@ -170,7 +170,7 @@
             },
             "type": "Demon",
             "lvl": 8, 
-            "strength": 0.9,
+            "strength": 0.8,
             "death": {
                 "Wizard": "",
                 "Archer": "",
