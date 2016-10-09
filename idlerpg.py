@@ -93,12 +93,9 @@ class IdleRPG(QMainWindow):
         menu_view = menubar.addMenu('&View')
         menu_view.addAction(action_reset)
         #menu_about = menubar.addMenu('&About')
-
-        self.stack = QStackedWidget(self)
         
         self.hero_selection = HeroSelection(self)
-        self.stack.addWidget(self.hero_selection)
-        self.setCentralWidget(self.stack)
+        self.setCentralWidget(self.hero_selection)
 
         self.hero_selection.btn_create.pressed.connect(lambda:self.startGame(self.hero_selection))
 
@@ -137,7 +134,6 @@ class IdleRPG(QMainWindow):
         self.createGameInterface()
 
     def saveGame(self):
-
         if not self.game.started:
             log.info("Interface :: tried to save a game that wasn't started")
             return False
@@ -171,41 +167,33 @@ class IdleRPG(QMainWindow):
         self.createGameInterface()
 
     def newGame(self):
-        if not self.game.started:
-            log.info("Interface :: tried to create new game on create new game screen")
-            return False
-
-        # Remove everything
-        self.clearGameInterface()
+        if hasattr(self, 'docks'):
+            log.debug("Interface :: hide all existing docks")
+            self.docks['stats'].hide()
+            self.docks['gear'].hide()
+            self.docks['ennemy'].hide()
+            self.docks['game_stats'].hide()
 
         self.game = Game()
+        log.debug("Game ::  Created the game object")
 
         self.hero_selection = HeroSelection(self)
-        self.stack.addWidget(self.hero_selection)
-        self.setCentralWidget(self.stack)
+        self.setCentralWidget(self.hero_selection)
+        log.debug("Interface :: Set Hero Selection as central widget")
 
         self.hero_selection.btn_create.pressed.connect(lambda:self.startGame(self.hero_selection))
 
     def aboutGame(self):
         QMessageBox.about(self, s['about_title'], s['about_dialog'])
 
-    def clearGameInterface(self):
-        # Remove everything
-        if hasattr(self, 'docks'):
-            self.docks['stats'].hide()
-            self.docks['gear'].hide()
-            self.docks['ennemy'].hide()
-            self.docks['game_stats'].hide()
-
-        self.stack = QStackedWidget(self)
-
     def createGameInterface(self):
         # switch the interface to the adventure one
         self.adventure = Adventure(self)
-        self.stack.addWidget(self.adventure)
-        self.stack.setCurrentIndex(1)
+        log.debug("Interface :: Set Adventure as central widget")
+        self.setCentralWidget(self.adventure)
 
         # Create Docks
+        log.debug("Interface :: Create Docks")
         self.docks = {}
         self.docks['stats'] = QDockWidget("Hero's Stats", self) 
         self.docks['gear'] = QDockWidget("Equipped Gear", self)
