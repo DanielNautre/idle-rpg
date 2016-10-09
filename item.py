@@ -39,7 +39,7 @@ class Item(object):
                 pass
             elif lvl >=10:
                 if dice > 5:
-                    nb = choice([1,2])
+                    nb = choice([1,2, 3])
                     self.rollEnchant(nb, job)
             self.rollName()
 
