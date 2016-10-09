@@ -13,6 +13,8 @@ Idle RPG is really an idle game because once, the game starts, you have no way o
 
 None
 
+Well none involving the player.
+
 ## Hero
 
 ### Attributes
@@ -66,12 +68,67 @@ The Archer start with high dexterity and a bonus to evasion
 It is the only class who can use bows and crossbows which may provide a bonus to evasion
 it has an armor effectiveness of 70%
 
+### Gear
+
+Your Hero may use a variety of gear. While most of the gear can be used by any classes, there are exceptions.
+
+Bows and Crossbows can only be used by archers, Staves can only be used by Wizards and Shields, Axes, Maces, Flails can only be used by Paladins. Sword may only be used by Wizards and Paladins.
+
+Starting at level 3, your Hero can find enchanted gear. and at level 10 you'll find gear with more enchants.
+
+
 ### Death
 
 Your Hero is not immortal, and he might fight an ennemy that is too strong for him. In which case, you have two options:
 
 * Reload the latest save: with some luck, your Hero might survive this time
 * Start a new character
+
+
+## Ennemies
+
+### Type
+
+Ennemies can be of several types:
+
+* Undead
+* Demon
+* Animal
+
+### Kill
+
+Once you have dealt enough damage to kill an ennemy you will be rewarded with experience points (xp) and gold.
+
+### Loot
+
+Once an ennemy has been disposed of, you will be able to loot its body. There is a 1 out of 6 chance to find something. 
+
+
+## Locations
+
+### Dungeons
+
+Dungeons are generately randomly from a predefined list. When travelling, your Hero has a certain chance of stumbling upon a dungeon.
+Your Hero will always enter them when he finds them.
+Dungeons are generated based on your Hero's level.
+
+#### Unique Dungeons
+
+Every time a new dungeon is generated, there is a small chance it will be a unique dungeon. Unique dungeons have their own name and will generally feature a unique boss in the last room.
+
+## Items
+
+### Gear
+
+### Potions
+
+
+
+### Potions (need better name)
+
+Starting at level 25, there is a rare chance that the hero may find special potions which will permanently increase one of his main attribute (Intelligence, Dexterity, Strength, Vitality). 
+
+
 
 Debuffs
 
