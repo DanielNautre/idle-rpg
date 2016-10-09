@@ -719,8 +719,6 @@ class GearStats(QWidget):
         elif gear.type == 'jewel':
             tt += ""
 
-        tt += "<p>{desc}</p>".format(desc=gear.desc)
-
         if gear.enchanted:
                 if 'debuff' in gear.enchant:
                     if gear.enchant['debuff'] == "Fire":
@@ -743,6 +741,8 @@ class GearStats(QWidget):
                     if key == 'debuff':
                         continue
                     tt += "<b>{0}</b>: <span style='color:green'>{1}</span><br \>".format(verboseEnchants(key), value) 
+
+        tt += "<p>{desc}</p>".format(desc=gear.desc)
 
         tt += "<h5>level {lvl} {sub}</h5>".format(lvl=gear.lvl, sub=gear.verboseSubtype())
 
