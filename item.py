@@ -156,6 +156,8 @@ class Item(object):
             self.setAffix(type, value)
 
     def setAffix(self, type, value):
+        if type == 'debuff':
+            return
         if type == "damage" and self.subtype == "staff":
             type = "mag_damage"
 
