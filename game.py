@@ -235,6 +235,8 @@ class Game(object):
 
         if len(matches) < 1:
             return False
+
+        log.debug("Dungeon Generation :: list of possible dungeons :: {}".format(matches))
         
         #select a random dungeon from the list of matching ones
         self.dungeon['id'] = choice(matches)
