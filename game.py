@@ -36,6 +36,7 @@ class Game(object):
     def __init__(self):
         super(Game, self).__init__()
         self.started = False
+        self.game_reloaded = False
 
         # The game starts you at home
         self.location = 'home'
