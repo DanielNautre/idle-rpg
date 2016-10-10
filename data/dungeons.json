@@ -31,6 +31,7 @@
         "unique": true, 
         "last_chamber": "Milling room",
         "unique_monster": {
+            "id": "andric",
             "name": "Andric the Miller",
             "weakness": "",
             "resistance": "",
@@ -58,6 +59,7 @@
         "unique": true, 
         "last_chamber": "Milling room",
         "unique_monster": {
+            "id": "bernard",
             "name": "Bernard the Dead Butcher", 
             "weakness": "",
             "resistance": "",
@@ -117,6 +119,7 @@
         "unique": true,
         "last_chamber": "Bishop's last chamber",
         "unique_monster": {
+            "id": "fallen_bishop",
             "name": "The Fallen Bishop",
             "weakness": "",
             "resistance": "",
@@ -160,6 +163,7 @@
         "unique": true,
         "last_chamber": "the Desecrated Nef",
         "unique_monster": {
+            "id": "lazarus",
             "name": "Lazarus", 
             "weakness": "",
             "resistance": "",

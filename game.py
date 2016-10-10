@@ -179,7 +179,6 @@ class Game(object):
                 hitpoints = int((lvl ** 1.35) * 4) + 5
                 name = champions[id]['name']
                 type = champions[id]['type']
-                id = champions[id]['id']
                 weakness = champions[id]['weakness']
                 resistance = champions[id]['resistance']
                 # only if boss
@@ -194,7 +193,6 @@ class Game(object):
                 hitpoints = int((lvl ** 1.35) * 2.5) + 2
                 name = monsters[id]['name']
                 type = monsters[id]['type']
-                id = monsters[id]['id']
                 weakness = monsters[id]['weakness']
                 resistance = monsters[id]['resistance']
                 # only if boss
