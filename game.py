@@ -227,7 +227,6 @@ class Game(object):
         for key in list(dungeons):
             if lvl in dungeons[key]['lvl']:
                 if key in self.finished_dungeon:
-                    del(dungeons[key])
                     continue
                 matches.append(key)
 
@@ -750,6 +749,8 @@ class Game(object):
                 self.location = 'fields'
                 message = message.format(hero=self.hero.name, dungeon=self.dungeon['name'], fields=self.verboseLocation(lvl))
                 channel.addStory(message)
+                if self.dungeon['unique']:
+                    self.finished_dungeon.append(self.dungeon['id'])
 
                 self.dungeon = dict(empty_dungeon)
 
