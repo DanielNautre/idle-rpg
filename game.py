@@ -151,6 +151,7 @@ class Game(object):
             death_message = boss['death']
             name = boss['name']
             type = boss['type']
+            id = boss['id']
             weakness = boss['weakness']
             resistance = boss['resistance']
             loot = boss['loot']
@@ -161,7 +162,6 @@ class Game(object):
             for key in monster_list:
                 if lvl >= monster_pool[key]['lvl'][0] and lvl <= monster_pool[key]['lvl'][1]:
                     if key in self.killed_champ:
-                        del(champions[key])
                         continue
                     matches.append(key)
 
@@ -179,6 +179,7 @@ class Game(object):
                 hitpoints = int((lvl ** 1.35) * 4) + 5
                 name = champions[id]['name']
                 type = champions[id]['type']
+                id = champions[id]['id']
                 weakness = champions[id]['weakness']
                 resistance = champions[id]['resistance']
                 # only if boss
@@ -193,6 +194,7 @@ class Game(object):
                 hitpoints = int((lvl ** 1.35) * 2.5) + 2
                 name = monsters[id]['name']
                 type = monsters[id]['type']
+                id = monsters[id]['id']
                 weakness = monsters[id]['weakness']
                 resistance = monsters[id]['resistance']
                 # only if boss
@@ -200,6 +202,7 @@ class Game(object):
                 death_message = None
                 taunt = False
 
+        self.ennemy['id'] = id
         self.ennemy['lvl'] = lvl
         self.ennemy['hitpoints'] = hitpoints
         self.ennemy['name'] = name
@@ -812,7 +815,7 @@ class Game(object):
         # increment stats and output death message for boss/champions
         if self.ennemy['unique'] > 1:
             self.unique_kills += 1
-            self.killed_champ.append(self.ennemy['name'])
+            self.killed_champ.append(self.ennemy['id'])
             death_message = self.ennemy['death'][self.hero.job]
             if len(death_message) > 0:
                 channel.addStory("<b>{0}</b>  <i>{1}</i>".format(self.hero.name, death_message))
