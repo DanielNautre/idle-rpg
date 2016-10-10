@@ -130,6 +130,13 @@ Starting at level 25, there is a rare chance that the hero may find special poti
 
 
 
+## Credits
+
+Game icons come from http://game-icons.net/
+
+Menu icons are from the Tango icon set: http://tango-project.org/
+
+
 Debuffs
 
 Here is the list of all debuff that a creature can suffer
