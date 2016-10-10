@@ -441,8 +441,8 @@ class EnnemyStats(QWidget):
         self.setLayout(self.fbox)
 
     def updateStats(self):
+        self.lbl_strength.setText("{0:.1f}".format(self.ennemy['strength'] * 2))
         self.lbl_hitpoints.setText("{0:.1f}".format(self.ennemy['hitpoints']))
-        self.lbl_hitpoints.setText("{0:.1f}".format(self.ennemy['strength'] * 2))
 
 
 class NoEnnemyStats(QWidget):
