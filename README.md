@@ -106,6 +106,19 @@ Once an ennemy has been disposed of, you will be able to loot its body. There is
 
 ## Locations
 
+### Home
+
+This is the place where the adventure starts. There isn't much to say: When you first start a character, you'll be at his home which he will promptly leave and never visit again.
+
+### Town
+
+Every once in a while you Hero may go back to town where he will perform a number of actions:
+
+* Visit the Healer to restore his health
+* visit the Enchanter to restore his mana
+* Sell the gear he found and do not want to use
+* Buy Health and Mana potions
+
 ### Dungeons
 
 Dungeons are generately randomly from a predefined list. When travelling, your Hero has a certain chance of stumbling upon a dungeon.
@@ -122,6 +135,11 @@ Every time a new dungeon is generated, there is a small chance it will be a uniq
 
 ### Potions
 
+The game feature two main potion types: Health and Mana
+
+These come in 10 different sizes depending on how much Life/Mana they regenerate. 
+How many potions the Hero can hold on to depends on whether or not he wears a belt and the level of his belt.
+The Hero can carry up to 8 potions of each type with a level 10 belt
 
 
 ### Potions (need better name)
@@ -136,6 +154,10 @@ Game icons come from http://game-icons.net/
 
 Menu icons are from the Tango icon set: http://tango-project.org/
 
+
+
+#### MISC
+To be added to above categories once I have things sorted.
 
 Debuffs
 
