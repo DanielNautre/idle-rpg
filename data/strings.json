@@ -67,7 +67,7 @@
     "poison": "{creature} looses {lost} due to poison",
     "burning_kill": "{creature} was consummed by the flammes",
     "poison_kill": "{creature} died of poisoning",
-    "about_dialog": "Idle RPG is a game that plays itself. Ideal for people who have no time to spend playing games but stil want to enjoy the satisfaction of progressing in one. It is based on a similar concept which I remember having played years ago but couldn't find anymore.", 
+    "about_dialog": "Idle RPG is a game that plays itself.\n Ideal for people who have no time to spend playing games but stil want to enjoy the satisfaction of progressing in one.\n\n It is based on a similar concept which I remember having played years ago but couldn't find anymore.", 
     "about_title": "About Idle RPG",
     "bizzare_potion": "{hero} found a bizzare potion <i>That looks dangerous, I'd better not drink that</i>",
     "att_potion": "{hero} found a potion of {type} and drinks it, gaining permanently +{value} {attribut}"
