@@ -112,6 +112,8 @@ class Game(object):
         self.dungeon = data['dungeon']
         self.ennemy = data['ennemy']
 
+        self.game_reloaded = True
+
     def generateEnnemy(self, lvl, unique=False, boss=False, monster_list=False):
         # Reset ennemy and common var used
         self.ennemy = dict(empty_ennemy)
@@ -397,6 +399,12 @@ class Game(object):
     def handleCombat(self, channel, docks):
         self.wait += 1
 
+        # If the game was just reloaded, we may want to update some things
+        if self.game_reloaded:
+            self.game_reloaded = False
+            # Update the dock
+            docks['ennemy'].setWidget(EnnemyStats(self.ennemy))
+
         # Hero's turn
         if self.wait == 0:
             # Hero's turn
@@ -585,6 +593,10 @@ class Game(object):
     def handleMoving(self, channel, docks):
         # default message
         message = ""
+
+        # If the game was just reloaded, we may want to update some things
+        if self.game_reloaded:
+            self.game_reloaded = False
 
         if self.location == 'home':
             self.wait += 1
