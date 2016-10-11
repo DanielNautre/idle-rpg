@@ -5,8 +5,15 @@ import logging
 #from logging.handlers import RotatingFileHandler
 
 # Fix for file paths errors
-import os
-PATH = os.path.dirname(os.path.realpath(__file__))
+import os, sys
+
+if getattr(sys, 'frozen', False):
+    # frozen
+    PATH = os.path.dirname(sys.executable)
+else:
+    # unfrozen
+    PATH = os.path.dirname(os.path.realpath(__file__))
+
 
 story = logging.getLogger('story')
 log = logging.getLogger('logs')

@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 # -*- coding: utf8 -*
 
-import sys
-
 # Fix for file paths errors
-import os
-PATH = os.path.dirname(os.path.realpath(__file__))
+import os, sys
+
+if getattr(sys, 'frozen', False):
+    # frozen
+    PATH = os.path.dirname(sys.executable)
+else:
+    # unfrozen
+    PATH = os.path.dirname(os.path.realpath(__file__))
 
 # Import other files from the project
 from game import Game

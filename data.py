@@ -4,8 +4,15 @@
 from json import load
 
 # Fix for file paths errors
-import os
-PATH = os.path.dirname(os.path.realpath(__file__))
+import os, sys
+
+if getattr(sys, 'frozen', False):
+    # frozen
+    PATH = os.path.dirname(sys.executable)
+else:
+    # unfrozen
+    PATH = os.path.dirname(os.path.realpath(__file__))
+    
 
 with open('{}/data/dungeons.json'.format(PATH)) as file:    
     dungeons = load(file)
