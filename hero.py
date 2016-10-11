@@ -696,7 +696,7 @@ class Hero(object):
         return choice(s['lvl_up'][self.job])
 
     def nextLvl(self):
-        return 150 * pow(self.lvl, 2) + 1850 * self.lvl
+        return 300 * pow(self.lvl, 2) + 1600 * self.lvl
 
     def equip(self, item):
         # test if item can be equipped
