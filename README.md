@@ -205,7 +205,7 @@ Items found by the Hero have always the same level as the Hero.
 
 If the Hero decides that the equipment piece he is currently wearing is better than the one he found, he will keep the new gear to sell it later.
 
-The number of equipment piece he can hold on too is determined by his strength. (NOT YET IMPLEMENTED)
+The Hero can hold on to 20 items before he has to sell them.
 
 #### Enchantements
 

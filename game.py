@@ -389,13 +389,16 @@ class Game(object):
             # update stats
             self.item_found += 1
 
-            if self.hero.equip(item):
+            if self.hero.equip(item) == True:
                 message = s['new_item']
                 message = message.format(hero=self.hero.name, item=item.fullname())
                 channel.updateSkills()
-            else:
+            elif == False:
                 message = s['crap_item']
                 message = message.format(hero=self.hero.name, item=item.fullname())
+            else:
+                message = s['inventory_full']
+                message.format(hero=self.hero.name)
 
         channel.addStory(message)
 
@@ -640,6 +643,7 @@ class Game(object):
                     channel.addStory(message)
                     self.hero.gold += self.hero.sell_value
                     self.hero.sell_value = 0
+                    self.used_slots = 0
 
             elif self.wait == 4:
 

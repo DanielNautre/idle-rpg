@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf8 -*
 
-from collections import deque
+from collections import deque, defaultdict
 from item import Item
 from random import choice
 
@@ -137,6 +137,9 @@ class Hero(object):
         self.gold_bonus = 1
 
         self.armor = 0
+
+        self.inventory_slots = 20
+        self.used_slots = 0
 
         # weaopn damage values
         if not self.gear['weapon']:
@@ -711,10 +714,14 @@ class Hero(object):
                 self.sell_value += self.gear[item.type][item.subtype].value()
                 self.gear[item.type][item.subtype] = item
                 return True
-            else:
+            elif self.inventory_slots > self.used_slots:
                 value = item.value()
                 self.sell_value += value
+                self.used_slots += 1
                 log.info('Hero :: Sell item :: {}'.format(value))
+                return False
+            else:
+                log.info('Hero :: Drop item (not enough space in inventory) :: {}'.format(value))
                 return False
         else:
             if not self.gear['weapon']:
@@ -726,10 +733,14 @@ class Hero(object):
                 self.sell_value += self.gear['weapon'].value()
                 self.gear['weapon'] = item
                 return True
-            else:
+            elif self.inventory_slots > self.used_slots:
                 value = item.value()
                 self.sell_value += value
+                self.used_slots += 1
                 log.info('Hero :: Sell item :: {}'.format(value))
+                return False
+            else:
+                log.info('Hero :: Drop item (not enough space in inventory) :: {}'.format(value))
                 return False
         
     def baseAtt(self):
