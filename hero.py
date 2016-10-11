@@ -693,6 +693,7 @@ class Hero(object):
 
         # set health to max
         self.heal('healer')
+        self.mana_restore('healer')
 
         # select message for the lvlUp
         log.info("Hero :: LVL UP")
