@@ -464,15 +464,15 @@ class Game(object):
                         chance = 10 
 
                 if effect_type:
-                    if oskill_list[skill_to_use]['type'] == "Fire":
+                    if oskill_list[skill_to_use]['type'] == "Fire" and "Fire" not in self.ennemy['resistance']:
                         if d100() <= chance:
                             self.ennemy['effects']['Burning'] = duration
                             log.debug("Combat :: Burning effect was applied")
-                    if oskill_list[skill_to_use]['type'] == "Poison":
+                    if oskill_list[skill_to_use]['type'] == "Poison" and "Poison" not in self.ennemy['resistance']:
                         if d100() <= chance:
                             self.ennemy['effects']['Poison'] = duration
                             log.debug("Combat :: Poison effect was applied")
-                    if oskill_list[skill_to_use]['type'] == "Electric":
+                    if oskill_list[skill_to_use]['type'] == "Electric" and "Electric" not in self.ennemy['resistance']:
                         if d100() <= chance:
                             self.ennemy['effects']['Weakness'] = duration
                             log.debug("Combat :: Weakness effect was applied")
@@ -480,7 +480,7 @@ class Game(object):
                             self.ennemy['strength'] -= lost
                             message = s['weakened'].format(creature=self.ennemy['name'], lost=lost)
                             channel.addStory(message)
-                    if oskill_list[skill_to_use]['type'] == "Ice":
+                    if oskill_list[skill_to_use]['type'] == "Ice" and "Ice" not in self.ennemy['resistance']:
                         if d100() <= chance:
                             self.ennemy['effects']['Stun'] = duration
                             log.debug("Combat :: Stun effect was applied")
