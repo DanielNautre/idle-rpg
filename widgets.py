@@ -992,6 +992,17 @@ class SkillItem(QFrame):
         tt += "Type: <b>{type}</b><br />".format(type=type)
         tt += "Next level require: <b>{value}</b> {att}<br />".format(value=value, att=att)
         tt += "Cost: <b>{cost}</b> Mana".format(desc=desc, cost=cost)
+
+        if oskill_list[skill]['requirement']:
+            if self.hero.skillReqMet(skill):
+                color = 'black'
+            else:
+                color = 'red'
+
+            req = oskill_list[skill]['requirement'].split()
+            tt += "<h4 style='color:{color}>Requires: {req}</h4>".format(color=color, req=verboseSubtype(req[1]))
+
+
         self.setToolTip(tt)
 
         image_path = '{0}/assets/{1}.png'.format(PATH, self.skill)

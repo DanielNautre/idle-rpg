@@ -398,16 +398,8 @@ class Hero(object):
                 log.debug("Hero :: cannot use {0} :: need {1} mana, {2:.1f} available".format(skill, self.offensive_skills[skill]['cost'], self.mana))
                 continue
 
-            if oskill_list[skill]['requirement']:
-                req = oskill_list[skill]['requirement'].split()
-                if req[0] == 'weapon':
-                    if req[1] in self.gear['weapon'].subtype:
-                        log.debug("Hero :: cannot use {0} :: need {1}".format(skill, req))
-                        continue
-                elif req[0] == 'armor':
-                    if not self.gear['armor'][req[1]]:
-                        log.debug("Hero :: cannot use {0} :: need {1}".format(skill, req))
-                        continue
+            if not self.skillReqMet(skill):
+                continue
 
             # calculate the min amount of damage the skill can do
             skill_damage = self.calcSkillMinDamage(skill)
@@ -466,6 +458,20 @@ class Hero(object):
 
         # if no good skill found (or no mana), use the default
         return default_skill
+
+    def skillReqMet(self, skill):
+        if oskill_list[skill]['requirement']:
+            req = oskill_list[skill]['requirement'].split()
+            if req[0] == 'weapon':
+                if req[1] in self.gear['weapon'].subtype:
+                    log.debug("Hero :: cannot use {0} :: need {1}".format(skill, req))
+                    return False
+            elif req[0] == 'armor':
+                if not self.gear['armor'][req[1]]:
+                    log.debug("Hero :: cannot use {0} :: need {1}".format(skill, req))
+                    return False
+        return True
+
 
     def calcSkillMinDamage(self, skill):
         slvl =  self.offensive_skills[skill]['lvl'] if skill in self.offensive_skills else 0

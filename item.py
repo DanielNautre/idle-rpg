@@ -18,6 +18,9 @@ from data import items, suffix, prefix, type_list, weapon_list, armor_list, jewe
 def verboseEnchants(enchant):
     return verbose_enchants[enchant]
 
+def verboseSubtype(subtype):
+        return verbose_subtype[subtype]
+
 class Item(object):
     def __init__(self, type=None, subtype=None, lvl=1, job=None, rare=False):
         super(Item, self).__init__()
