@@ -19,6 +19,9 @@ Well none involving the player.
 
 [![Code Climate](https://codeclimate.com/github/DanielNautre/idle-rpg/badges/gpa.svg)](https://codeclimate.com/github/DanielNautre/idle-rpg)
 [![Build Status](https://travis-ci.org/DanielNautre/idle-rpg.svg?branch=master)](https://travis-ci.org/DanielNautre/idle-rpg)
+[![Python](https://img.shields.io/badge/Python-3.4-brightgreen.svg)](https://github.com/DanielNautre/idle-rpg)
+
+
 
 ## Hero
 
