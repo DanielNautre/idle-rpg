@@ -541,7 +541,7 @@ class Game(object):
                 message = message.format(creature=self.ennemy['name'], crit=critic_msg, hero=self.hero.name, dam=nmy_damage)
                 channel.addStory(message, tt)
 
-                log.debug("Combat :: Armor / Absorbtion :: {0}, {1}".format(self.hero.armor, absorbtion))
+                log.debug("Combat :: Armor / Absorbtion :: {0:.1f}, {1}".format(self.hero.armor, absorbtion))
                 log.debug("Combat :: Ennemy hits (raw, min, final) :: {0}, {1}, {2}".format(raw_damage, min_damage, nmy_damage))
             else:
                 message = s['blocked'][self.hero.job]
