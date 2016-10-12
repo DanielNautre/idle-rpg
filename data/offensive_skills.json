@@ -1,6 +1,7 @@
 {
     "firebolt": {
         "name": "Firebolt",
+        "requirement": False,
         "type": "Fire",
         "chance" : 10,
         "duration": 2,
@@ -17,6 +18,7 @@
     },
     "chargedbolt": {
         "name": "Charged Bolt",
+        "requirement": False,
         "type": "Electric",
         "chance" : 10,
         "duration": 2,
@@ -34,6 +36,7 @@
     },
     "fireball": {
         "name": "Fireball",
+        "requirement": False,
         "type": "Fire",
         "chance" : 10,
         "duration": 2,
@@ -50,6 +53,7 @@
     },
     "flamewave": {
         "name": "Flame Wave",
+        "requirement": False,
         "type": "Fire",
         "chance" : 10,
         "duration": 2,
@@ -66,6 +70,7 @@
     },
     "arrowrain": {
         "name": "Rain of arrows",
+        "requirement": False,
         "type": "Physical",
         "chance" : 10,
         "duration": 0,
@@ -82,6 +87,7 @@
     },
     "charge": {
         "name": "Charge",
+        "requirement": "armor shield",
         "type": "Physical",
         "chance" : 10,
         "duration": 0,
@@ -98,6 +104,7 @@
     },
     "heal": {
         "name": "Heal",
+        "requirement": False,
         "type": "Healing",
         "chance" : 10,
         "duration": 0,

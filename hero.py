@@ -398,6 +398,17 @@ class Hero(object):
                 log.debug("Hero :: cannot use {0} :: need {1} mana, {2:.1f} available".format(skill, self.offensive_skills[skill]['cost'], self.mana))
                 continue
 
+            if oskill_list[skill]['requirement']:
+                req = oskill_list[skill]['requirement'].split()
+                if req[0] == 'weapon':
+                    if req[1] in self.gear['weapon'].subtype:
+                        log.debug("Hero :: cannot use {0} :: need {1}".format(skill, req))
+                        continue
+                elif req[0] == 'armor':
+                    if not self.gear['armor'][req[1]]:
+                        log.debug("Hero :: cannot use {0} :: need {1}".format(skill, req))
+                        continue
+
             # calculate the min amount of damage the skill can do
             skill_damage = self.calcSkillMinDamage(skill)
 
