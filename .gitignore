@@ -49,3 +49,5 @@ Temporary Items
 logs/story.html
 logs/debug.log
 *.sav
+idle-rpg.sublime-project
+idle-rpg.sublime-workspace
