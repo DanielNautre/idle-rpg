@@ -267,7 +267,7 @@ class Item(object):
 
             for key2 in ['int', 'str', 'dex', 'vit', 'all']: 
                 if key2 in self.enchant: 
-                    value2 = item.enchant[key]
+                    value2 = item.enchant[key2]
 
             val = ((value - value2) * 7) / 10
             log.debug("Item :: Compare Enchants :: New : {0} {1} Old: {2} {3}".format(key, value, key2, value2))
