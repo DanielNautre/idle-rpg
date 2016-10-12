@@ -393,7 +393,7 @@ class Game(object):
                 message = s['new_item']
                 message = message.format(hero=self.hero.name, item=item.fullname())
                 channel.updateSkills()
-            elif == False:
+            elif self.hero.equip(item) == False:
                 message = s['crap_item']
                 message = message.format(hero=self.hero.name, item=item.fullname())
             else:
