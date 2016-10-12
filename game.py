@@ -775,6 +775,8 @@ class Game(object):
                 if message:
                     message = message.format(hero=self.hero.name, creature=self.ennemy['name'])
                     channel.addStory(message) 
+                    # Update the dock
+                    docks['ennemy'].setWidget(EnnemyStats(self.ennemy))
 
                     # Taunt the Hero upon spawn
                     taunt = choice(self.ennemy['taunt'])
