@@ -248,45 +248,44 @@ class Item(object):
             item_average = (item.damage_min + item.damage_max) / 2
             val = ((item_average - average) * 4) / 10
             log.debug("Item :: Compare Damage :: New: {0} Old: {1}".format(item_average, average))
-            log.debug("Item :: Compare Damage :: {} pips for damage".format(val))
+            log.debug("Item :: Compare Damage :: {0:.1f} pips for damage".format(val))
             pips += val
 
         # compare raw armor
         elif self.type == 'armor':
             val = ((item.armor - self.armor) * 4) / 10
             log.debug("Item :: Compare Armor :: New: {0} Old: {1}".format(item.armor, self.armor))
-            log.debug("Item :: Compare Armor:: {} pips ".format(val))
+            log.debug("Item :: Compare Armor:: {0:.1f} pips ".format(val))
             pips += val 
 
 
         if item.enchanted:
-
             for key in ['int', 'str', 'dex', 'vit', 'all']:
                 if key in item.enchant: 
                     value = item.enchant[key]
 
             for key2 in ['int', 'str', 'dex', 'vit', 'all']: 
                 if key2 in self.enchant: 
-                    value2 = item.enchant[key2]
+                    value2 = self.enchant[key2]
 
             val = ((value - value2) * 7) / 10
             log.debug("Item :: Compare Enchants :: New : {0} {1} Old: {2} {3}".format(key, value, key2, value2))
-            log.debug("Item :: Compare Enchants:: {} pips ".format(val))
+            log.debug("Item :: Compare Enchants:: {0:.1f} pips ".format(val))
             pips += val
 
             val = ((item.lvl - self.lvl) * 3) / 10
             log.debug("Item :: Compare Lvl :: New: {0} Old: {1}".format(item.lvl, self.lvl))
-            log.debug("Item :: Compare Lvl:: {} pips ".format(val))
+            log.debug("Item :: Compare Lvl:: {0:.1f} pips ".format(val))
             pips += val
 
             if len(item.enchant) > len(self.enchant):
                 val = (len(item.enchant) - len(self.enchant) * 2) / 10
                 log.debug("Item :: Compare Nb of Enchants :: New: {0} Old: {1}".format(len(item.enchant), len(self.enchant)))
-                log.debug("Item :: Compare Nb of Enchants:: {} pips ".format(val))
+                log.debug("Item :: Compare Nb of Enchants:: {0:.1f} pips ".format(val))
                 pips += val
 
 
-        log.debug("Item :: Comparaison value :: {}".format(pips))
+        log.debug("Item :: Comparaison value :: {0:.1f}".format(pips))
 
         if pips > 0:
             return True
