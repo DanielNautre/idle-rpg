@@ -42,6 +42,9 @@ def main():
 if __name__ == '__main__':
 
     log.info("========== STARTING NEW SESSION ============")
-    main()
+    try:
+        ma in()
+    exceptException as error:
+        log.exception(error)
 
 #EOF
