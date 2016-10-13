@@ -993,13 +993,13 @@ class SkillItem(QFrame):
         tt += "Next level require: <b>{value}</b> {att}<br />".format(value=value, att=att)
         tt += "Cost: <b>{cost}</b> Mana".format(desc=desc, cost=cost)
 
-        if oskill_list[skill]['requirement']:
-            if self.hero.skillReqMet(skill):
+        if oskill_list[self.skill]['requirement']:
+            if self.hero.skillReqMet(self.skill):
                 color = 'black'
             else:
                 color = 'red'
 
-            req = oskill_list[skill]['requirement'].split()
+            req = oskill_list[self.skill]['requirement'].split()
             tt += "<h4 style='color:{color}>Requires: {req}</h4>".format(color=color, req=verboseSubtype(req[1]))
 
 
