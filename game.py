@@ -827,7 +827,7 @@ class Game(object):
             if len(death_message) > 0:
                 channel.addStory("<b>{0}</b>  <i>{1}</i>".format(self.hero.name, death_message))
 
-        earned_xp = int(self.ennemy['lvl'] * 100 * self.ennemy['strength'] * unique)
+        earned_xp = int(100 * self.ennemy['strength'] * unique)
         earned_gold = int(self.ennemy['lvl'] + choice([1, 2, 3]) * unique * self.hero.gold_bonus * self.ennemy['strength'])
 
         self.hero.xp += earned_xp
