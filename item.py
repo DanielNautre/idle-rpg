@@ -217,7 +217,7 @@ class Item(object):
             value = int(self.lvl * (d6()/6) / 10)
             self.enchant[type] = round(max(value, 0.1), 1)
         elif type == 'gold':
-            value = int(self.lvl * (d6()/6))
+            value = int(self.lvl / 10 * (d6()/6))
             self.enchant[type] = round(max(value, 1), 1)
         elif type == 'debuff':
             value = choice(['Ice','Electric','Fire','Poison', 'Arcane', 'Sacred'])
