@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*
 
 # Fix for file paths errors
-import os, sys
+import os, sys, traceback
 
 if getattr(sys, 'frozen', False):
     # frozen
@@ -43,8 +43,8 @@ if __name__ == '__main__':
 
     log.info("========== STARTING NEW SESSION ============")
     try:
-        ma in()
-    exceptException as error:
-        log.exception(error)
+        main()
+    except:
+        log.exception(traceback.format_exc())
 
 #EOF
