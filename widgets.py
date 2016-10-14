@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QToolTip, QPushButton,
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QFont, QIcon, QPixmap
 
-from item import verboseEnchants
+from item import verboseEnchants, verboseSubtype
 
 # Import logger
 from logger import log, story
