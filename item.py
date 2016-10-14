@@ -35,14 +35,18 @@ class Item(object):
 
             # choose if enchanted item
             dice = d100()
-            if lvl >= 3 and lvl < 10:
-                if dice > 85:
-                    nb = choice([0,1])
+            if lvl >= 3 and lvl < 15:
+                if dice > 90:
+                    nb = choice([0,0,0,1])
                     self.rollEnchant(nb, job)
                 pass
-            elif lvl >=10:
+            elif lvl >= 15 and lvl < 30:
+                if dice > 15:
+                    nb = choice([0,1,1,1,2])
+                    self.rollEnchant(nb, job)
+            elif lvl >= 30:
                 if dice > 5:
-                    nb = choice([1,2, 3])
+                    nb = choice([1,1,1,1,1,2,2,2,2,2,3])
                     self.rollEnchant(nb, job)
             self.rollName()
 
