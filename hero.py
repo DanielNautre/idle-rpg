@@ -611,13 +611,15 @@ class Hero(object):
             for skill in self.offensive_skills:
                 if oskill_list[skill]['type'] == "Healing":
                     if self.offensive_skills[skill]['cost'] > self.mana:
+                        log.debug("Hero ::  Healing spell too expensive")
                         return False
                     self.health += self.health_max * 0.5
                     self.health = max(self.health, self.health_max)
                     self.mana -= self.offensive_skills[skill]['cost']
-                else:
-                    return False
-
+                    log.debug("Hero :: Used Healing Spell")
+                    return True
+            log.debug("Hero :: No Healing spell available")
+            return False
         return True
 
     def manaLow(self):
