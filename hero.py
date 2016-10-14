@@ -128,8 +128,8 @@ class Hero(object):
         self.addGearAttBonus()
 
         # max mana and health
-        self.health_max = int(((self.vitality * 10) + (self.lvl * 4 * self.healing_modifier)) / 10)
-        self.mana_max = int(((self.intelligence * 10) + (self.lvl * 4 * self.mana_modifier)) / 10)
+        self.health_max = int(((self.vitality * 10) + (self.lvl * 8)) / 10)
+        self.mana_max = int(((self.intelligence * 10) + (self.lvl * 8)) / 10)
 
 
         self.mana_regen = 0
@@ -695,11 +695,11 @@ class Hero(object):
         self.base_vitality += 2
 
         if self.job == 'Wizard':
-            self.base_intelligence += 3
+            self.base_intelligence += 2
         elif self.job == 'Paladin':
-            self.base_strength += 3    
+            self.base_strength += 2    
         elif self.job == 'Archer':
-            self.base_dexterity += 3
+            self.base_dexterity += 2
 
         # Every 2 level, the hero gains 1 bonus intelligence (for mana needs)
         if self.lvl % 2 == 0:
