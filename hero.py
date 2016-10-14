@@ -405,7 +405,8 @@ class Hero(object):
             skill_damage = self.calcSkillMinDamage(skill)
 
             if skill_damage == 0:
-                skill_tactical[skill] = oskill_list[skill]['duration']
+                if skill not in ['heal']:
+                    skill_tactical[skill] = oskill_list[skill]['duration']
 
             # take ennemy weakness into account
             if oskill_list[skill]['type'] in weakness:
@@ -448,9 +449,11 @@ class Hero(object):
         if len(highest_damage) > 0 and len(skill_tactical) > 0:
             sorted_skill = sorted(skill_tactical.items(), key=operator.itemgetter(1), reverse=True)
             if damage > 5 * highest_damage[0][1]:
-                for skill in sorted_skill:
+                for skill, value in sorted_skill:
                     if oskill_list[skill]['type'] in weakness:
                         return skill
+                # if we haven't found a skill matching his weakness, return the skill with the longest duration
+                return sorted_skill[0][0]
 
         # If that doesn't work, do maximal amount of damage with a skill
         if len(skill_under) > 0:
