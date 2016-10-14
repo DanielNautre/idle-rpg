@@ -46,8 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.pyc
-logs/story.html
-logs/debug.log
+logs/*
 *.sav
-idle-rpg.sublime-project
-idle-rpg.sublime-workspace
+*.sublime-workspace
+*.sublime-project
