@@ -83,6 +83,7 @@ class Game(object):
         data['killed_champ'] = self.killed_champ
         data['finished_dungeon'] = self.finished_dungeon
         data['skill_usage'] = self.skill_usage
+        data['town_trips'] = self.town_trips
 
         # Game values
         data['location'] = self.location
@@ -107,6 +108,7 @@ class Game(object):
         self.killed_champ = data['killed_champ']
         self.finished_dungeon = data['finished_dungeon']
         self.skill_usage = data['skill_usage']
+        self.town_trips = data['town_trips']
 
         # Game values
         self.location = data['location']
