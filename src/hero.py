@@ -637,7 +637,9 @@ class Hero(object):
         else:
             next_potion = self.mana_max
 
-        if self.mana < min_mana:
+        if len(self.offensive_skills) == 0:
+            return False
+        elif self.mana < min_mana:
             return True
         elif self.mana + next_potion <= self.mana_max:
             return True
