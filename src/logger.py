@@ -10,9 +10,11 @@ import os, sys
 if getattr(sys, 'frozen', False):
     # frozen
     PATH = os.path.dirname(sys.executable)
+    PATH = "{}/../../".format(PATH)
 else:
     # unfrozen
     PATH = os.path.dirname(os.path.realpath(__file__))
+    PATH = "{}/../".format(PATH)
 
 
 story = logging.getLogger('story')
