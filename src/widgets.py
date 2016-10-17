@@ -417,11 +417,24 @@ class EnnemyStats(QWidget):
             string += "{} ".format(weakness)
         self.lbl_weakness = QLabel(string)
 
+        string = ""
+        for resistance in self.ennemy['resistance']:
+            string += "{} ".format(resistance)
+        self.lbl_resistance = QLabel(string)
+
+        string = ""
+        for debuff in self.ennemy['effects']:
+            string += "{} ".format(debuff)
+        self.lbl_debuff = QLabel(string)
+
+
         lbl_lvl_name = QLabel('Level:')
         lbl_type_name = QLabel('Type:')
         lbl_strength_name = QLabel('Strength:')
         lbl_hitpoints_name = QLabel('Hitpoints:')
         lbl_weakness_name = QLabel('Weakness:')
+        lbl_resistance_name = QLabel('Resistance:')
+        lbl_debuff_name = QLabel('Debuffs:')
 
         font_lbl = QFont('Helvetica', 10)
         font_lbl.setBold(True)
@@ -431,6 +444,8 @@ class EnnemyStats(QWidget):
         lbl_strength_name.setFont(font_lbl)
         lbl_hitpoints_name.setFont(font_lbl)
         lbl_weakness_name.setFont(font_lbl)
+        lbl_resistance_name.setFont(font_lbl)
+        lbl_debuff_name.setFont(font_lbl)
 
         self.fbox.addRow(lbl_name)
         self.fbox.addRow(lbl_lvl_name, self.lbl_lvl)
@@ -438,11 +453,18 @@ class EnnemyStats(QWidget):
         self.fbox.addRow(lbl_strength_name, self.lbl_strength)
         self.fbox.addRow(lbl_hitpoints_name, self.lbl_hitpoints)
         self.fbox.addRow(lbl_weakness_name, self.lbl_weakness)
+        self.fbox.addRow(lbl_resistance_name, self.lbl_resistance)
+        self.fbox.addRow(lbl_debuff_name, self.lbl_debuff)
         self.setLayout(self.fbox)
 
     def updateStats(self):
         self.lbl_strength.setText("{0:.1f}".format(self.ennemy['strength'] * 2))
         self.lbl_hitpoints.setText("{0:.1f}".format(self.ennemy['hitpoints']))
+
+        string = ""
+        for debuff in self.ennemy['effects']:
+            string += "{} ".format(debuff)
+        self.lbl_debuff.setText(string)
 
 
 class NoEnnemyStats(QWidget):
