@@ -149,7 +149,7 @@ class Game(object):
             log.debug("Monster :: Boss info ::\n {}".format(boss))
             lvl = self.hero.lvl # boss['lvl']
             strength = boss['strength'] * (lvl ** 1.12)
-            modifier += 2 * strength
+            modifier += 2 * boss['strength']
             hitpoints = int(((lvl ** 1.5) * 4.5) + 10 + (random() * lvl))
             death_message = boss['death']
             name = boss['name']
@@ -188,7 +188,7 @@ class Game(object):
                 loot = champions[id]['loot']
                 death_message = champions[id]['death']
                 taunt = champions[id]['taunt'][self.hero.job]
-                modifier += 2 * strength
+                modifier += 2 * champions[id]['strength']
                 del(champions[id])
             else:        
                 message = s['spawn']
