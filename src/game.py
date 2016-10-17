@@ -484,7 +484,7 @@ class Game(object):
                             self.ennemy['effects']['Weakness'] = duration
                             log.debug("Combat :: Weakness effect was applied")
                             lost = round(self.ennemy['strength'] * 0.1, 1)
-                            self.ennemy['strength'] -= lost
+                            self.ennemy['strength'] = round(self.ennemy['strength'] - lost, 1)
                             message = s['weakened'].format(creature=self.ennemy['name'], lost=lost)
                             channel.addStory(message)
                     if effect_type == "Ice" and "Ice" not in self.ennemy['resistance']:
