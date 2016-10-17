@@ -537,7 +537,7 @@ class Game(object):
                 nmy_damage = round(max(raw_damage - absorbtion, min_damage), 1)
                 
                 self.hero.health -= nmy_damage
-                self.hero.health = max(self.hero.health, 0)
+                self.hero.health = round(max(self.hero.health, 0), 1)
 
                 message = s['hero_hit']
                 tt = "Raw Damage: {0}<br />".format(raw_damage)
