@@ -262,6 +262,10 @@ class Item(object):
             log.debug("Item :: Compare Armor:: {0:.1f} pips ".format(val))
             pips += val 
 
+        val = ((item.lvl - self.lvl) * 3) / 10
+        log.debug("Item :: Compare Lvl :: New: {0} Old: {1}".format(item.lvl, self.lvl))
+        log.debug("Item :: Compare Lvl:: {0:.1f} pips ".format(val))
+        pips += val
 
         if item.enchanted:
             for key in ['int', 'str', 'dex', 'vit', 'all']:
@@ -275,11 +279,6 @@ class Item(object):
             val = ((value - value2) * 7) / 10
             log.debug("Item :: Compare Enchants :: New : {0} {1} Old: {2} {3}".format(key, value, key2, value2))
             log.debug("Item :: Compare Enchants:: {0:.1f} pips ".format(val))
-            pips += val
-
-            val = ((item.lvl - self.lvl) * 3) / 10
-            log.debug("Item :: Compare Lvl :: New: {0} Old: {1}".format(item.lvl, self.lvl))
-            log.debug("Item :: Compare Lvl:: {0:.1f} pips ".format(val))
             pips += val
 
             if len(item.enchant) > len(self.enchant):
