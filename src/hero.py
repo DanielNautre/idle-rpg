@@ -703,7 +703,8 @@ class Hero(object):
 
     def lvlUp(self):
         self.lvl += 1
-        self.xp = 0
+        overflow = int(self.xp - self.next_lvl)
+        self.xp = overflow
 
         self.base_vitality += 2
 
