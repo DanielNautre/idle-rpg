@@ -283,10 +283,11 @@ class Game(object):
 
         if loot:
             # check for incompatible suptype before dropping loot
+            log.debug("LootDrop :: create unique loot ::\n{}".format(loot))
             if self.hero.job == 'Wizard' and loot['type'] == 'weapon' and not loot['subtype'] in ['sword', 'staff']:
-                pass
+                log.debug("LootDrop :: Unique loot cannot be created because Hero is a Wizard")
             elif not self.hero.job == 'Paladin' and loot['subtype'] == 'shield':
-                pass
+                log.debug("LootDrop :: Unique loot cannot be created because Hero is not a Paladin")
             else:
                 item = Item(job=self.hero.job, rare=loot)
 
