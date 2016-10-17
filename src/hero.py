@@ -574,7 +574,7 @@ class Hero(object):
                 return 0
 
             damage = self.calcSkillDamage(skill)
-            self.mana -= self.offensive_skills[skill]['cost']
+            self.mana = round(self.mana - self.offensive_skills[skill]['cost'], 1)
 
             if oskill_list[skill]['type'] in weakness:
                 damage += damage * 0.1   
