@@ -391,11 +391,13 @@ class Game(object):
             # update stats
             self.item_found += 1
 
-            if self.hero.equip(item) == True:
+            equip_success = self.hero.equip(item)
+
+            if equip_success == True:
                 message = s['new_item']
                 message = message.format(hero=self.hero.name, item=item.fullname())
                 channel.updateSkills()
-            elif self.hero.equip(item) == False:
+            elif equip_success == False:
                 message = s['crap_item']
                 message = message.format(hero=self.hero.name, item=item.fullname())
             else:

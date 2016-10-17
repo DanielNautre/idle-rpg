@@ -766,7 +766,7 @@ class Hero(object):
                 value = item.value()
                 self.sell_value += value
                 self.used_slots += 1
-                log.info('Hero :: Sell item :: {}'.format(value))
+                log.info('Hero :: Sell weapon :: {}'.format(value))
                 return False
             else:
                 log.info('Hero :: Drop item (not enough space in inventory) :: {}'.format(value))
