@@ -172,7 +172,7 @@ class Item(object):
             for key in list(suffix[type]):
                 min = suffix[type][key][0]
                 max = suffix[type][key][1]
-                if value in range(min, max):
+                if min <= value <= max:
                     self.suffix = key
                     log.debug("Item :: set suffix :: {0}".format(key))
                     break
@@ -180,7 +180,7 @@ class Item(object):
             for key in list(prefix[type]):
                 min = prefix[type][key][0]
                 max = prefix[type][key][1]
-                if value in range(min, max):
+                if min <= value <= max:
                     self.prefix = key
                     log.debug("Item :: set preffix :: {0}".format(key))
                     break
@@ -303,7 +303,7 @@ class Item(object):
         for key in list(items[self.type][self.subtype]):
             min = items[self.type][self.subtype][key][0]
             max = items[self.type][self.subtype][key][1]
-            if self.lvl in range(min, max):
+            if min <= self.lvl <= max:
                 self.name = key
                 break
 
