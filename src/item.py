@@ -236,6 +236,8 @@ class Item(object):
         # return true if item is better
         pips = 0
 
+        log.debug("Item :: Old item ::\n {}".format(self))
+
         if self.enchanted and not item.enchanted:
             # if the new item is not enchanted, don't bother trying to equip it
             log.info("Item :: New item is not enchanted, old one is")
