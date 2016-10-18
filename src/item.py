@@ -209,10 +209,10 @@ class Item(object):
             value = int(self.lvl * (d6()/6))
             self.enchant[type] = round(max(value, 1), 1)
         elif type == 'mana_regen':
-            value = int(self.lvl * (d6()/6) / 10)
+            value = int(self.lvl * (d6()/6) / 20)
             self.enchant[type] = round(max(value, 0.1), 1)
         elif type == 'life_regen':
-            value = int(self.lvl * (d6()/6) / 10)
+            value = int(self.lvl * (d6()/6) / 20)
             self.enchant[type] = round(max(value, 0.1), 1)
         elif type == 'damage':
             value = int(self.lvl * (d6()/6) / 10)
