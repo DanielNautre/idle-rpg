@@ -329,7 +329,7 @@ class IdleRPG(QMainWindow):
             ennemy_widget = self.docks['ennemy'].widget()
             ennemy_widget.updateStats()
 
-        self.statusBar.showMessage("Time passed: {0}s".format(self.ticks * 2))
+        #self.statusBar.showMessage("Time passed: {0}s".format(self.ticks * 2))
         self.ticks += 1
 
         if self.ticks % 40 == 0:
