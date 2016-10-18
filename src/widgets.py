@@ -308,9 +308,9 @@ class HeroStats(QWidget):
         tt +='<i>({block} x {dext}) / 2 x {lvl}</i>'.format(block=self.hero.blocking,dext=dext,lvl=self.hero.lvl)
         self.lbl_block.setToolTip(tt)
 
-        self.lbl_armor = QLabel("{0:0.1f}".format(self.hero.armor))
-        tt = "Max Armor absorbtion: <b>{0:0.1f}</b><br />".format(self.hero.armor * self.hero.armor_eff)
-        tt += "<br /><i>Armor absorbs up to 90% damage</i>"
+        self.lbl_armor = QLabel("{0:0.1f}".format(self.hero.armor * self.hero.armor_eff))
+        tt = "Raw Armor: <b>{:.1f}</b><br />".format(self.hero.armor)
+        tt += "Effectiveness: <b>{:.1f}</b>".format(self.hero.armor_eff * 100)
         self.lbl_armor.setToolTip(tt)
         self.lbl_damage = QLabel("{0}-{1}".format(self.hero.damage_min, self.hero.damage_max))
         tt = "<b>Base Damage:</b> {0}-{1}".format(self.hero.base_damage_min, self.hero.base_damage_max)
@@ -383,9 +383,9 @@ class HeroStats(QWidget):
         tt += '<br />'
         tt +='<i>({block} x {dext}) / 2 x {lvl}</i>'.format(block=self.hero.blocking,dext=dext,lvl=self.hero.lvl)
         self.lbl_block.setToolTip(tt)
-        self.lbl_armor.setText("{0:0.1f}".format(self.hero.armor))
-        tt = "Max Armor absobtion: <b>{0:0.1f}</b><br />".format(self.hero.armor * self.hero.armor_eff)
-        tt += "<br /><i>Armor absorbs up to 90% damage<i>"
+        self.lbl_armor.setText("{:.1f}".format(self.hero.armor * self.hero.armor_eff))
+        tt = "Raw Armor: <b>{:.1f}</b><br />".format(self.hero.armor)
+        tt += "Effectiveness: <b>{:.1f}</b>".format(self.hero.armor_eff * 100)
         self.lbl_armor.setToolTip(tt)
         self.lbl_damage.setText("{0}-{1}".format(self.hero.damage_min, self.hero.damage_max))
         tt = "Base Damage: <b>{0}-{1}</b>".format(self.hero.base_damage_min, self.hero.base_damage_max)
