@@ -541,8 +541,7 @@ class Game(object):
                 self.hero.health = round(max(self.hero.health, 0), 1)
 
                 message = s['hero_hit']
-                tt = "Raw Damage: {0}<br />".format(raw_damage)
-                tt += "Max Absorption: {0}".format(absorbtion)
+                tt = "Raw Damage: {0}".format(raw_damage)
                 message = message.format(creature=self.ennemy['name'], crit=critic_msg, hero=self.hero.name, dam=nmy_damage)
                 channel.addStory(message, tt)
 
