@@ -647,7 +647,7 @@ class Game(object):
                     channel.addStory(message)
                     self.hero.gold += self.hero.sell_value
                     self.hero.sell_value = 0
-                    self.used_slots = 0
+                    self.hero.used_slots = 0
 
             elif self.wait == 4:
 
