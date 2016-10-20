@@ -264,7 +264,7 @@ class Item(object):
             log.debug("Item :: Compare Armor:: {0:.1f} pips ".format(val))
             pips += val 
 
-        val = ((item.lvl - self.lvl) * 3) / 10
+        val = ((item.lvl - self.lvl)) / 10
         log.debug("Item :: Compare Lvl :: New: {0} Old: {1}".format(item.lvl, self.lvl))
         log.debug("Item :: Compare Lvl:: {0:.1f} pips ".format(val))
         pips += val
