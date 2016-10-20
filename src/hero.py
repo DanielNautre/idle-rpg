@@ -674,7 +674,7 @@ class Hero(object):
         potions = sorted(mpotion_type.items(), key=operator.itemgetter(1))
         for key, value in potions:
 
-            if (value * self.mana_modifier) <= self.health_max / 2:
+            if (value * self.mana_modifier) <= self.mana_max / 2:
                 continue
             else:
                 log.debug("Hero :: potion type :: {}".format(key))
