@@ -583,11 +583,11 @@ class Game(object):
 
             # clear debuffs if counter reached 0
             marked = []
-
-            for debuff in self.ennemy['effects']:
-                self.ennemy['effects'][debuff] -= 1
-                if self.ennemy['effects'][debuff] == 0:
-                    marked.append(debuff)
+            if self.ennemy['effects']:
+                for debuff in self.ennemy['effects']:
+                    self.ennemy['effects'][debuff] -= 1
+                    if self.ennemy['effects'][debuff] == 0:
+                        marked.append(debuff)
 
             log.debug("Combat :: Debuff marked for deletion {}".format(marked))
 
