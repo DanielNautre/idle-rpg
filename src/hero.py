@@ -73,6 +73,9 @@ class Hero(object):
         self.health = self.health_max
         self.mana = self.mana_max if self.job == 'Wizard' else 0
 
+        self.inventory_slots = 20
+        self.used_slots = 0
+
     def save(self):
         data = {}
         data['name'] = self.name
@@ -142,9 +145,6 @@ class Hero(object):
         self.gold_bonus = 1
 
         self.armor = 0
-
-        self.inventory_slots = 20
-        self.used_slots = 0
 
         # weaopn damage values
         if not self.gear['weapon']:
