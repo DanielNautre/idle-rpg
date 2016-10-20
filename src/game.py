@@ -147,7 +147,7 @@ class Game(object):
         if boss:
             log.info("Monster :: Generate Boss")
             log.debug("Monster :: Boss info ::\n {}".format(boss))
-            lvl = self.hero.lvl # boss['lvl']
+            lvl = boss['lvl']
             strength = boss['strength'] * (lvl ** 1.12)
             modifier += 2 * boss['strength']
             hitpoints = int(((lvl ** 1.5) * 4.5) + 10 + (random() * lvl))
