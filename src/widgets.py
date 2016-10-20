@@ -316,6 +316,7 @@ class HeroStats(QWidget):
         tt = "<b>Base Damage:</b> {0}-{1}".format(self.hero.base_damage_min, self.hero.base_damage_max)
         self.lbl_damage.setToolTip(tt)
         self.lbl_gold = QLabel(str(self.hero.gold))
+        self.lbl_inventory = QLabel("{1}/{0}".format(self.hero.inventory_slots, self.hero.used_slots))
 
         lbl_job_name = QLabel('Class')
         lbl_lvl_name = QLabel('Level')
@@ -330,6 +331,7 @@ class HeroStats(QWidget):
         lbl_damage_name = QLabel('Damage')
 
         lbl_gold_name = QLabel('Gold')
+        lbl_inventory_name = QLabel('Inventory')
 
         font_lbl = QFont('Helvetica', 10)
         font_lbl.setBold(True)
@@ -344,6 +346,7 @@ class HeroStats(QWidget):
         lbl_armor_name.setFont(font_lbl)
         lbl_damage_name.setFont(font_lbl)
         lbl_gold_name.setFont(font_lbl)
+        lbl_inventory_name.setFont(font_lbl)
 
         fbox.addRow(lbl_name)
         fbox.addRow(lbl_lvl_name, self.lbl_lvl)
@@ -358,6 +361,7 @@ class HeroStats(QWidget):
         fbox.addRow(lbl_armor_name, self.lbl_armor)
         fbox.addRow(lbl_damage_name, self.lbl_damage)
         fbox.addRow(lbl_gold_name, self.lbl_gold)
+        fbox.addRow(lbl_inventory_name, self.lbl_inventory)
 
         self.setLayout(fbox)
         self.setMinimumWidth(200)
@@ -391,6 +395,7 @@ class HeroStats(QWidget):
         tt = "Base Damage: <b>{0}-{1}</b>".format(self.hero.base_damage_min, self.hero.base_damage_max)
         self.lbl_damage.setToolTip(tt)
         self.lbl_gold.setText(str(self.hero.gold))
+        self.lbl_inventory.setText("{1}/{0}".format(self.hero.inventory_slots, self.hero.used_slots))
 
 
 class EnnemyStats(QWidget):
