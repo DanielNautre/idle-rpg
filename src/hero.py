@@ -664,19 +664,14 @@ class Hero(object):
     def hpotion_type(self):
         potions = sorted(hpotion_type.items(), key=operator.itemgetter(1))
         for key, value in potions:
-            if (value * self.healing_modifier) <= self.health_max / 2:
-                continue
-            else:
+            if self.health_max / (value * self.healing_modifier) < 3:
                 log.debug("Hero :: potion type :: {}".format(key))
                 return key
 
     def mpotion_type(self):
         potions = sorted(mpotion_type.items(), key=operator.itemgetter(1))
         for key, value in potions:
-
-            if (value * self.mana_modifier) <= self.mana_max / 2:
-                continue
-            else:
+            if self.mana_max / (value * self.mana_modifier) < 3:
                 log.debug("Hero :: potion type :: {}".format(key))
                 return key
 
