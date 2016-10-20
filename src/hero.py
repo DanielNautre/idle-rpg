@@ -98,6 +98,7 @@ class Hero(object):
         data['health'] = self.health
         data['mana'] = self.mana
         data['buffs'] = self.buffs
+        data['used_slots'] = self.used_slots
 
         return data
 
@@ -125,6 +126,7 @@ class Hero(object):
         self.health = data['health']
         self.mana = data['mana']    
         self.buffs = data['buffs']    
+        self.used_slots = data['used_slots']    
 
     def deriveSecondaryStats(self):
         self.next_lvl = self.nextLvl()
