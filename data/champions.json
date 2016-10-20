@@ -32,8 +32,27 @@
         "weakness": "",
         "resistance": "",
         "type": "demon",
-        "lvl": [1, 2], 
+        "lvl": [2, 3], 
         "strength": 0.1,
+        "taunt": {
+            "Wizard": ["Your spells can do nothing against me"],
+            "Archer": ["Prepare to die"],
+            "Paladin": ["I will crush you"]
+        },
+        "death": {
+            "Wizard": "He should have thought twice before saying that",
+            "Archer": "You should have stayed home Jock",
+            "Paladin": "You will crush no one today Jock"
+        },
+        "loot": null
+    }, 
+    "samy": {
+        "name": "Samy the Fool", 
+        "weakness": "",
+        "resistance": "",
+        "type": "demon",
+        "lvl": [3, 4], 
+        "strength": 0.4,
         "taunt": {
             "Wizard": ["Your spells can do nothing against me"],
             "Archer": ["Prepare to die"],
@@ -45,23 +64,23 @@
             "Paladin": ""
         },
         "loot": null
-    }, 
-    "samy": {
-        "name": "Samy the Fool", 
-        "weakness": "",
+    },
+    "molerat": {
+        "name": "Mole Rat", 
+        "weakness": "Physical",
         "resistance": "",
-        "type": "demon",
-        "lvl": [1, 2], 
-        "strength": 0.4,
+        "type": "animal",
+        "lvl": [1, 1], 
+        "strength": 0.1,
         "taunt": {
-            "Wizard": ["Your spells can do nothing against me"],
-            "Archer": ["Prepare to die"],
-            "Paladin": ["I will crush you"]
+            "Wizard": ["Rrr"],
+            "Archer": ["Rrr"],
+            "Paladin": ["Rrr"]
         },
         "death": {
-            "Wizard": "",
-            "Archer": "",
-            "Paladin": ""
+            "Wizard": "I've never read about this abomination, what could it be ?",
+            "Archer": "What was that thing ?",
+            "Paladin": "From which demoniac plane did this escape ?"
         },
         "loot": null
     }

@@ -44,9 +44,9 @@
             "lvl": 3, 
             "strength": 0.4,            
             "death": {
-                "Wizard": "",
-                "Archer": "",
-                "Paladin": ""
+                "Wizard": "Your passing will be mourned Andric",
+                "Archer": "Your passing will be mourned Andric",
+                "Paladin": "Your passing will be mourned Andric"
             },
             "loot": null
         }
@@ -72,9 +72,9 @@
             "lvl": 4, 
             "strength": 0.6,
             "death": {
-                "Wizard": "",
-                "Archer": "",
-                "Paladin": ""
+                "Wizard": "Such a waste",
+                "Archer": "Such a waste",
+                "Paladin": "Such a waste"
             },
             "loot": null
         }
@@ -121,20 +121,20 @@
         "unique_monster": {
             "id": "fallen_bishop",
             "name": "The Fallen Bishop",
-            "weakness": "",
-            "resistance": "",
+            "weakness": "Eletric, Ice",
+            "resistance": "Fire",
             "taunt": {
-                "Paladin": ["The end is nigh for you Paladin"],
-                "Wizard": ["The end is nigh for you Wizard"],
-                "Archer": ["The end is nigh for you Archer"]
+                "Paladin": ["You shouldn't have come here"],
+                "Wizard": ["You shouldn't have come here"],
+                "Archer": ["You shouldn't have come here"]
             },
-            "type": "Undead",
+            "type": "demon",
             "lvl": 5, 
             "strength": 0.6,
             "death": {
-                "Wizard": "",
-                "Archer": "",
-                "Paladin": ""
+                "Wizard": "Your treason has come to an end",
+                "Archer": "Your treason has come to an end",
+                "Paladin": "Your treason has come to an end"
             },
             "loot": null
         }
@@ -152,6 +152,14 @@
         "lvl": [7,8,9,11,13,15], 
         "rooms": [5,6],
         "monsters": ["zombie", "ghoul", "crawler", "fallen", "fallen_shaman"],
+        "unique": false,
+        "unique_monster": false
+    },
+    "sewer": {
+        "name": ["Rotten Sewer", "Overgrown Sewer", "Sewer", "Flooded Sewer"], 
+        "lvl": [8,9,10], 
+        "rooms": [15,20],
+        "monsters": ["electric_eel", "zombie", "fallen", "fallen_shaman"],
         "unique": false,
         "unique_monster": false
     },
@@ -176,9 +184,9 @@
             "lvl": 8, 
             "strength": 0.8,
             "death": {
-                "Wizard": "",
-                "Archer": "",
-                "Paladin": ""
+                "Wizard": "Your victimes are avenged Lazarus",
+                "Archer": "Your victimes are avenged Lazarus",
+                "Paladin": "Your victimes are avenged Lazarus"
             },
             "loot": null
         }
@@ -187,6 +195,14 @@
         "name": ["Church", "Desecrated Church", "Ruined Church"],
         "lvl": [11,11], 
         "rooms": [10,12],
+        "monsters": ["skeleton", "skeleton_archer", "zombie", "zombie_torso", "fallen_shaman", "fallen", "crawler"],
+        "unique": false,
+        "unique_monster": false
+    },
+    "guard_tower": {
+        "name": ["Old Guard Tower", "Guard Tower"],
+        "lvl": [12,14], 
+        "rooms": [5,10],
         "monsters": ["skeleton", "skeleton_archer", "zombie", "zombie_torso", "fallen_shaman", "fallen", "crawler"],
         "unique": false,
         "unique_monster": false

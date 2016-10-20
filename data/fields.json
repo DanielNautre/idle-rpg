@@ -1,8 +1,9 @@
 {
     "Fields": [1,2],
     "Meadow": [2,3],
-    "Highlands": [3,5],
-    "Dark Forest": [5,7],
+    "Highlands": [3,4],
+    "Dark Forest": [4,5],
+    "Treacherous Hills": [5,7],
     "Swamps": [7,10],
     "Tormented Desert": [10,20],
     "Wastelands": [20,25],

@@ -10,7 +10,7 @@
     },
     "cockroach": {
         "name": "Cockroach", 
-        "weakness": "",
+        "weakness": "Fire",
         "resistance": "",
         "type": "Animal",
         "lvl": [1,2], 
@@ -19,8 +19,8 @@
     },
     "small-spider": {
         "name": "Small Spider", 
-        "weakness": "",
-        "resistance": "",
+        "weakness": "Fire",
+        "resistance": "Poison",
         "type": "Animal",
         "lvl": [1,2], 
         "strength": 0.3,
@@ -125,6 +125,15 @@
         "strength": 0.4,
         "loot": null
     },
+    "spider": {
+        "name": "Spider", 
+        "weakness": "Fire",
+        "resistance": "Poison",
+        "type": "Animal",
+        "lvl": [6,13], 
+        "strength": 0.5,
+        "loot": null
+    },
     "bear": {
         "name": "Bear", 
         "weakness": "",
@@ -143,7 +152,7 @@
         "strength": 0.5,
         "loot": null
     },
-    "savage_houl": {
+    "savage_ghoul": {
         "name": "Savage Ghoul", 
         "weakness": "",
         "resistance": "",
@@ -152,10 +161,19 @@
         "strength": 0.6,
         "loot": null
     },
+    "scorpion": {
+        "name": "Scorpion", 
+        "weakness": "",
+        "resistance": "Poison",
+        "type": "Animal",
+        "lvl": [9,13], 
+        "strength": 0.5,
+        "loot": null
+    },  
     "electric_eel": {
         "name": "Electric Eel", 
         "weakness": "Fire",
-        "resistance": "",
+        "resistance": "Electric",
         "type": "Animal",
         "lvl": [8,15], 
         "strength": 0.2,
