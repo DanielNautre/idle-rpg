@@ -149,7 +149,7 @@ class Item(object):
             possible_enchants.remove('damage')
             possible_enchants.remove('gold')
             possible_enchants.remove('debuff')
-        elif self.type == 'jewelry':
+        elif self.type == 'jewel':
             possible_enchants.remove('armor')
             possible_enchants.remove('damage')
             possible_enchants.remove('debuff')
